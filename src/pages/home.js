@@ -1,5 +1,6 @@
 import arrow from '../assets/arrow.png'
-import './keyboard.css'
+import '../assets/styles/keyboard.css'
+import '../assets/styles/home.css'
 
 export const Home = () => {
     return (
@@ -11,7 +12,7 @@ export const Home = () => {
             </div>
             <div className='test-section'>
                 <div className='sentence'>
-                    <p>Lorem Ipsum is the word used everywhere to represent bogus sentence, that actually has no meaning to it</p>
+                    <p>Lorem Ipsum is the word used everywhere to represent bogus sentence, that actually is a has no meaning to it</p>
                 </div>
                 <div className='keyboard'>
                     <div class="main-container">
