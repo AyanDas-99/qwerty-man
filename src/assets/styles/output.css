@@ -1,0 +1,23 @@
+.output {
+    border: 8px solid grey;
+    border-radius: 50%;
+    width: fit-content;
+    padding: 5em;
+}
+
+.output > p {
+    font-size: 4rem;
+    font-weight: 600;
+}
+
+.output > .speed {
+    font-size: 6rem;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    height: 100vh;
+}

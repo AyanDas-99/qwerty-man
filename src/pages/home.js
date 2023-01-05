@@ -1,4 +1,5 @@
 import arrow from '../assets/arrow.png'
+import retryImg from '../assets/retry.png'
 import '../assets/styles/keyboard.css'
 import '../assets/styles/home.css'
 
@@ -112,6 +113,9 @@ export const Home = () => {
                             <div class="col">Ctrl</div>
                         </div>
                     </div>
+                </div>
+                <div className='retryBtn'>
+                    <img src={retryImg} alt="retry btn" />
                 </div>
             </div>
         </>
