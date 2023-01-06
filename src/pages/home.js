@@ -2,8 +2,23 @@ import arrow from '../assets/arrow.png'
 import retryImg from '../assets/retry.png'
 import '../assets/styles/keyboard.css'
 import '../assets/styles/home.css'
+import useAPI from '../custom-hook/useSentence'
+import { useState } from 'react'
 
 export const Home = () => {
+
+    const { data, error, loading, setData } = useAPI();
+    const [inputText, setInputText] = useState("");
+    const [correctWords, setCorrectWords] = useState(0);
+
+
+    const typed = (e) => {
+        if(e.target.value === data.substring(0, e.target.value.length) && e.target.value.charAt(e.target.value.length-1) === ' ') {
+            setData(data.substring(e.target.value.length), data.length);
+            e.target.value = "";
+        }
+    }
+
     return (
         <>
             <div className="hero-section">
@@ -13,9 +28,12 @@ export const Home = () => {
             </div>
             <div className='test-section'>
                 <div className='sentence'>
-                    <p>Lorem Ipsum is the word used everywhere to represent bogus sentence, that actually is a has no meaning to it</p>
+                    <p>{data}</p>
                 </div>
-                <div className='keyboard'>
+                <div className='write'>
+                    <input type={"text"} onChange={(e) => typed(e)} />
+                </div>
+                {/* <div className='keyboard'>
                     <div class="main-container">
                         <div class="row">
                             <div class="col">Esc</div>
@@ -113,7 +131,7 @@ export const Home = () => {
                             <div class="col">Ctrl</div>
                         </div>
                     </div>
-                </div>
+                </div> */}
                 <div className='retryBtn'>
                     <img src={retryImg} alt="retry btn" />
                 </div>
