@@ -3,19 +3,33 @@ import retryImg from '../assets/retry.png'
 import '../assets/styles/keyboard.css'
 import '../assets/styles/home.css'
 import useAPI from '../custom-hook/useSentence'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 export const Home = () => {
 
-    const { data, error, loading, setData } = useAPI();
+    const { data, error, isLoading } = useAPI();
     const [inputText, setInputText] = useState("");
     const [correctWords, setCorrectWords] = useState(0);
+    const [text, setText] = useState("");
 
+    useEffect(() => {
+        setText(String(data));
+    }, [data])
 
     const typed = (e) => {
-        if(e.target.value === data.substring(0, e.target.value.length) && e.target.value.charAt(e.target.value.length-1) === ' ') {
-            setData(data.substring(e.target.value.length), data.length);
-            e.target.value = "";
+        const allLetters = Array.from(document.getElementsByClassName('letter'));
+        (allLetters).map(e => e.classList.remove('highLight'));
+        if (e.target.value === text.substring(0, e.target.value.length)) {
+            if(e.target.value.charAt(e.target.value.length-1) === ' ') {
+                setText(text.substring(e.target.value.length));
+                e.target.value = '';
+                console.log('correct word')
+            }
+            for (let i = 0; i < e.target.value.length; i++) {
+                allLetters[i].classList.add('highLight');
+                console.log(allLetters[i])
+            }
+
         }
     }
 
@@ -28,114 +42,25 @@ export const Home = () => {
             </div>
             <div className='test-section'>
                 <div className='sentence'>
-                    <p>{data}</p>
+                    <Words sentence={text} />
                 </div>
                 <div className='write'>
                     <input type={"text"} onChange={(e) => typed(e)} />
                 </div>
-                {/* <div className='keyboard'>
-                    <div class="main-container">
-                        <div class="row">
-                            <div class="col">Esc</div>
-                            <div class="col">F1</div>
-                            <div class="col">F2</div>
-                            <div class="col">F3</div>
-                            <div class="col">F4</div>
-                            <div class="col">F5</div>
-                            <div class="col">F6</div>
-                            <div class="col">F7</div>
-                            <div class="col">F8</div>
-                            <div class="col">F9</div>
-                            <div class="col">F11</div>
-                            <div class="col">F12</div>
-                            <div class="col">Print <span>Screen</span></div>
-                            <div class="col">Scroll <span>Lock</span></div>
-                            <div class="col">Pause <span>Break</span></div>
-                        </div>
-                        <div class="row">
-                            <div class="col symb"><span>~</span>`</div>
-                            <div class="col symb"><span>!</span>1</div>
-                            <div class="col symb"><span>@</span>2</div>
-                            <div class="col symb"><span>#</span>3</div>
-                            <div class="col symb"><span>$</span>4</div>
-                            <div class="col symb"><span>%</span>5</div>
-                            <div class="col symb"><span>^</span>6</div>
-                            <div class="col symb"><span>&</span>7</div>
-                            <div class="col symb"><span>*</span>8</div>
-                            <div class="col symb"><span>(</span>9</div>
-                            <div class="col symb"><span>)</span>0</div>
-                            <div class="col symb"><span>_</span>-</div>
-                            <div class="col symb"><span>+</span>=</div>
-                            <div class="col backspace">Backspace</div>
-                        </div>
-                        <div class="row">
-                            <div class="col  tab">Tab</div>
-                            <div class="col col-key">q</div>
-                            <div class="col col-key">w</div>
-                            <div class="col col-key">e</div>
-                            <div class="col col-key">r</div>
-                            <div class="col col-key">t</div>
-                            <div class="col col-key">y</div>
-                            <div class="col col-key">u</div>
-                            <div class="col col-key">i</div>
-                            <div class="col col-key">o</div>
-                            <div class="col col-key">p</div>
-                            <div class="col"><span>{'{'}</span><span>[</span></div>
-                            <div class="col"><span>{'}'}</span><span>]</span></div>
-                            <div class="col slace"><span>|</span><span>\</span></div>
-                        </div>
-                        <div class="row">
-                            <div class="col capsloack">caps <span>lock</span></div>
-                            <div class="col col-key">a</div>
-                            <div class="col col-key">s</div>
-                            <div class="col col-key">d</div>
-                            <div class="col col-key">f</div>
-                            <div class="col col-key">g</div>
-                            <div class="col col-key">h</div>
-                            <div class="col col-key">j</div>
-                            <div class="col col-key">k</div>
-                            <div class="col col-key">l</div>
-                            <div class="col"><span>:</span><span>;</span></div>
-                            <div class="col"><span>"</span><span>'</span></div>
-                            <div class="col enter">Enter</div>
-                        </div>
-                        <div class="row">
-                            <div class="col shift">Shift</div>
-                            <div class="col col-key">z</div>
-                            <div class="col col-key">x</div>
-                            <div class="col col-key">c</div>
-                            <div class="col col-key">v</div>
-                            <div class="col col-key">b</div>
-                            <div class="col col-key">n</div>
-                            <div class="col col-key">m</div>
-                            <div class="col"><span>{'<'}</span><span>,</span></div>
-                            <div class="col"><span>{'>'}</span><span>.</span></div>
-                            <div class="col"><span>{'>'}</span><span>.</span></div>
-                            <div class="col"><span>?</span><span>/</span></div>
-                            <div class="col shift">Shift</div>
-                        </div>
-                        <div class="row">
-                            <div class="col ctrl">Ctrl</div>
-                            <div class="col">win</div>
-                            <div class="col">Alt</div>
-                            <div class="col space"></div>
-                            <div class="col">Alt</div>
-                            <div class="col">win</div>
-                            <div class="col">
-                                <div class="rightclickopt">
-                                    <span></span>
-                                    <span></span>
-                                    <span></span>
-                                </div>
-                            </div>
-                            <div class="col">Ctrl</div>
-                        </div>
-                    </div>
-                </div> */}
                 <div className='retryBtn'>
                     <img src={retryImg} alt="retry btn" />
                 </div>
             </div>
         </>
+    )
+}
+
+const Words = (props) => {
+    const data = props.sentence;
+    console.log(data)
+    return (
+        <p>
+            {[...data].map((e, key) => <span key={key} className='letter'>{e}</span>)}
+        </p>
     )
 }
