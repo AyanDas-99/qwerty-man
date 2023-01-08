@@ -52,3 +52,8 @@
 .highLight {
     color: white;
 }
+
+.wrongLetter {
+    color: red;
+    text-decoration: underline;
+}
