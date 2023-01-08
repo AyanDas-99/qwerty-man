@@ -48,3 +48,7 @@
 .retryBtn:hover {
     cursor: pointer;
 }
+
+.highLight {
+    color: white;
+}
