@@ -2,6 +2,7 @@ import arrow from '../assets/arrow.png'
 import retryImg from '../assets/retry.png'
 import '../assets/styles/home.css'
 import useAPI from '../custom-hook/useSentence'
+// import useTimer from '../custom-hook/useTimer'
 import { useEffect, useState } from 'react'
 import { Output } from './output'
 
@@ -12,7 +13,23 @@ export const Home = () => {
     const [correctWords, setCorrectWords] = useState(0);
     const [wrongWords, setWrongWords] = useState(0);
     const [text, setText] = useState([]);
-    const [time, setTime] = useState(1);
+    const [seconds, setSeconds] = useState(10);
+    const [testFinished, setTestFinished] = useState(false);
+
+
+    const runTimer = () => {
+        const timer = setInterval(() => {
+            setSeconds((seconds) => {
+                console.log(seconds);
+                if (seconds === 1) {
+                    clearInterval(timer);
+                    setTestFinished(true);
+                    return 0;
+                }
+                return seconds - 1;
+            });
+        }, 1000)
+    }
 
     useEffect(() => {
         setText([...String(data)].filter(e => e !== '\n'));
@@ -56,22 +73,26 @@ export const Home = () => {
                 <img src={arrow} alt='arrow' />
             </div>
 
-            <div className='test-section'>
-                <div className='sentence'>
-                    <Words sentence={text} />
-                </div>
+            {!testFinished ?
+                <div className='test-section'>
 
-                <div className='write'>
-                    <input type={"text"} onChange={(e) => typed(e)} />
-                    <div>{correctWords}</div>
-                </div>
+                    <div className='sentence'>
+                        <Words sentence={text} />
+                    </div>
 
-                <div className='retryBtn'>
-                    <img src={retryImg} alt="retry btn" />
-                </div>
-            </div>
+                    <div className='write'>
+                        <input type={"text"} onChange={(e) => typed(e)} on/>
+                        <div>{correctWords}</div>
+                    </div>
 
-            <Output correctWords={correctWords} totalWords={totalWords} time={1} wrongWords={wrongWords} />
+                    <div className='retryBtn'>
+                        {seconds}<br /><br />
+                        <img src={retryImg} alt="retry btn" />
+                    </div>
+                </div>
+                :
+                <Output correctWords={correctWords} totalWords={totalWords} time={10} wrongWords={wrongWords} />
+            }
         </>
     )
 }
