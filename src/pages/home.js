@@ -3,18 +3,20 @@ import retryImg from '../assets/retry.png'
 import '../assets/styles/home.css'
 import useAPI from '../custom-hook/useSentence'
 import { useEffect, useState } from 'react'
+import { Output } from './output'
 
 export const Home = () => {
 
     const { data, error, isLoading } = useAPI();
-    const [correctLetters, setCorrectLetters] = useState(0);
-    const [wrongLetters, setLetters] = useState(0);
+    const [totalWords, setTotalWords] = useState(0);
+    const [correctWords, setCorrectWords] = useState(0);
+    const [wrongWords, setWrongWords] = useState(0);
     const [text, setText] = useState([]);
+    const [time, setTime] = useState(1);
 
     useEffect(() => {
         setText([...String(data)].filter(e => e !== '\n'));
     }, [data])
-    console.log(text)
 
     const typed = (e) => {
 
@@ -25,7 +27,6 @@ export const Home = () => {
         // removing previous white color
         letters.map(e => e.classList.remove('highLight', 'wrongLetter'))
 
-        console.log(letters)
         // Checking if correct
         for (let i = 0; i < e.target.value.length; i++) {
             if (e.target.value.charAt(i) === letters[i].textContent) {
@@ -36,6 +37,10 @@ export const Home = () => {
             }
 
             if (letters[i].textContent === ' ') {
+                setTotalWords(totalWords + 1);
+                if (text.slice(0, e.target.value.length).join("") === e.target.value) setCorrectWords(correctWords + 1)
+                else setWrongWords(wrongWords + 1)
+                console.log(correctWords + " correct words and " + wrongWords + " wrong words")
                 setText(text.splice(e.target.value.length));
                 e.target.value = '';
                 letters.map(e => e.classList.remove('highLight', 'wrongLetter'))
@@ -58,13 +63,15 @@ export const Home = () => {
 
                 <div className='write'>
                     <input type={"text"} onChange={(e) => typed(e)} />
-                    <div>{ }</div>
+                    <div>{correctWords}</div>
                 </div>
 
                 <div className='retryBtn'>
                     <img src={retryImg} alt="retry btn" />
                 </div>
             </div>
+
+            <Output correctWords={correctWords} totalWords={totalWords} time={1} wrongWords={wrongWords} />
         </>
     )
 }
