@@ -13,11 +13,18 @@ export const Output = (props) => {
     }
     return (
         <div className='output-container'>
+
+            {/* Main result */}
             <div className='main-data'>
-                <div className="speed-div">
+
+                {/* Main Speed */}
+                <div className="speed-div effect">
                     <p className='speed'>{netSpeed}</p>
                     <p>WPM</p>
                 </div>
+
+
+                {/*  Additional Data*/}
                 <div className='additional'>
                     <Info type="Accuracy" data={accuracy.toFixed(2)} extension="%" />
                     <Info type={'Raw Speed'} data={grossSpeed} extension={"WPM"} />
@@ -25,15 +32,17 @@ export const Output = (props) => {
                     <Info type={'Wrong Words'} data={props.wrongWords} extension={""} />
                 </div>
             </div>
+
+            {/* Retry Button */}
             <div className='controls'>
-                <button onClick={() => reload()}>New Test <img src={retryBtn} alt="retry button" /></button>
+                <button className='retryBtn' onClick={() => reload()}>New Test <img src={retryBtn} alt="retry button" /></button>
             </div>
         </div>
     )
 }
 
 
-const Info = (props) => {
+export const Info = (props) => {
     console.log(props.extension)
     return (
         <div className='additional-info-container'>
