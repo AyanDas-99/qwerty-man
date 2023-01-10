@@ -1,27 +1,29 @@
 import arrow from '../assets/arrow.png'
 import retryImg from '../assets/retry.png'
+import retryImgWhite from '../assets/retry-white.png'
 import '../assets/styles/home.css'
 import useAPI from '../custom-hook/useSentence'
-// import useTimer from '../custom-hook/useTimer'
 import { useEffect, useState } from 'react'
-import { Output } from './output'
+import { Info, Output } from './output'
+
 
 export const Home = () => {
 
-    const { data, error, isLoading } = useAPI();
+    const { data, error, isLoading, refetch } = useAPI();
     const [totalWords, setTotalWords] = useState(0);
     const [correctWords, setCorrectWords] = useState(0);
     const [wrongWords, setWrongWords] = useState(0);
     const [text, setText] = useState([]);
-    const [seconds, setSeconds] = useState(60);
+    const [time, setTime] = useState(60);
+    const [seconds, setSeconds] = useState(time);
     const [testFinished, setTestFinished] = useState(false);
     const [hasRun, setHasRun] = useState(false);
 
 
+    // Timer Function
     const runTimer = () => {
         const timer = setInterval(() => {
             setSeconds((seconds) => {
-                // console.log(seconds);
                 if (seconds === 1) {
                     clearInterval(timer);
                     setTestFinished(true);
@@ -39,6 +41,10 @@ export const Home = () => {
     useEffect(() => {
         if (hasRun) runTimer();
     }, [hasRun])
+
+    useEffect(() => {
+        setSeconds(time)
+    }, [time])
 
     const typed = (e) => {
         // set hasRun true to know when to start timer
@@ -82,22 +88,32 @@ export const Home = () => {
             {!testFinished ?
                 <div className='test-section'>
 
+                    {/* TImer section */}
+                    <div className='timer-section'>
+                        <Info type={"Timer"} data={seconds} extension={"s"} />
+                        {!hasRun &&
+                            <div className='timer-options'>
+                                <button className='option-item' onClick={() => setTime(15)}>15s</button>
+                                <button className='option-item' onClick={() => setTime(30)}>30s</button>
+                                <button className='option-item' onClick={() => setTime(60)}>60s</button>
+                            </div>
+                        }
+                    </div>
+
                     <div className='sentence'>
                         <Words sentence={text} />
                     </div>
 
                     <div className='write'>
-                        <input type={"text"} onChange={(e) => typed(e)} />
-                        <div>{correctWords}</div>
+                        <input type={"text"} onChange={(e) => typed(e)} id="input-text" />
                     </div>
 
-                    <div className='retryBtn'>
-                        {seconds}<br /><br />
-                        <img src={retryImg} alt="retry btn" />
+                    <div className='RetryBtn' onClick={() => window.navigation.reload()}>
+                        <img src={retryImgWhite} alt="retry btn" id='retryImg' />
                     </div>
                 </div>
                 :
-                <Output correctWords={correctWords} totalWords={totalWords} time={60} wrongWords={wrongWords} />
+                <Output correctWords={correctWords} totalWords={totalWords} time={time} wrongWords={wrongWords} />
             }
         </>
     )
