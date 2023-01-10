@@ -2,15 +2,15 @@ import '../assets/styles/output.css'
 import retryBtn from '../assets/retry.png'
 
 export const Output = (props) => {
-    const netSpeed = props.correctWords / (props.time / 60);
+    const netSpeed = Number(props.correctWords) / (Number(props.time) / 60);
     const grossSpeed = props.totalWords / (props.time / 60);
     const accuracy = netSpeed * 100 / grossSpeed;
-
+    console.log(`Correct words: ${props.correctWords}\nWrong words: ${props.wrongWords}\nnet speed: ${netSpeed}\nGross speed: ${grossSpeed}\nAccuracy: ${accuracy}`)
+    console.log((props.time), typeof props.time)
 
     const reload = () => {
         window.navigation.reload();
     }
-
     return (
         <div className='output-container'>
             <div className='main-data'>
@@ -19,7 +19,7 @@ export const Output = (props) => {
                     <p>WPM</p>
                 </div>
                 <div className='additional'>
-                    <Info type={'Accuracy'} data={Math.floor(accuracy)} extention={"%"} />
+                    <Info type="Accuracy" data={accuracy.toFixed(2)} extension="%" />
                     <Info type={'Raw Speed'} data={grossSpeed} extension={"WPM"} />
                     <Info type={'Correct Words'} data={props.correctWords} extension={""} />
                     <Info type={'Wrong Words'} data={props.wrongWords} extension={""} />
@@ -34,6 +34,7 @@ export const Output = (props) => {
 
 
 const Info = (props) => {
+    console.log(props.extension)
     return (
         <div className='additional-info-container'>
             <div className='type'>{props.type}</div>
