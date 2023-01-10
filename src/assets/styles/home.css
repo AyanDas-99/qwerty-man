@@ -30,22 +30,18 @@
 }
 
 .test-section>.sentence>p {
-    font-size: 1.5rem;
+    font-size: 2rem;
     max-width: 1000px;
     overflow: hidden;
-    height: 1.5rem;
-    padding: 5px;
+    height: 2rem;
+    padding: 8px;
 }
 
-.test-section>.sentence {
-    border-bottom: 2px solid grey;
-}
-
-.retryBtn>img {
+.RetryBtn>img {
     width: 50px;
 }
 
-.retryBtn:hover {
+.RetryBtn:hover {
     cursor: pointer;
 }
 
@@ -56,4 +52,38 @@
 .wrongLetter {
     color: red;
     text-decoration: underline;
+}
+
+.write {
+    width: 100%;
+}
+
+.write>input {
+    width: 60%;
+    font-size: 1.5rem;
+    background-color: #313B4F;
+    border: none;
+    outline: none;
+    color: white;
+    padding: 10px;
+    text-align: center;
+}
+
+.timer-section {
+    display: flex;
+    align-items: center;
+    gap: 6em;
+}
+
+.option-item {
+    font-size: 1.5rem;
+    margin: .7em;
+    border: none;
+    background: transparent;
+    color: #949BAB;
+}
+
+.option-item:hover {
+    cursor: pointer;
+    color: white;
 }
