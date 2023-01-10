@@ -13,14 +13,15 @@ export const Home = () => {
     const [correctWords, setCorrectWords] = useState(0);
     const [wrongWords, setWrongWords] = useState(0);
     const [text, setText] = useState([]);
-    const [seconds, setSeconds] = useState(10);
+    const [seconds, setSeconds] = useState(60);
     const [testFinished, setTestFinished] = useState(false);
+    const [hasRun, setHasRun] = useState(false);
 
 
     const runTimer = () => {
         const timer = setInterval(() => {
             setSeconds((seconds) => {
-                console.log(seconds);
+                // console.log(seconds);
                 if (seconds === 1) {
                     clearInterval(timer);
                     setTestFinished(true);
@@ -35,8 +36,13 @@ export const Home = () => {
         setText([...String(data)].filter(e => e !== '\n'));
     }, [data])
 
-    const typed = (e) => {
+    useEffect(() => {
+        if (hasRun) runTimer();
+    }, [hasRun])
 
+    const typed = (e) => {
+        // set hasRun true to know when to start timer
+        setHasRun(true);
         // spans array
         const letters = Array.from(document.getElementsByClassName('letter'));
 
@@ -57,7 +63,7 @@ export const Home = () => {
                 setTotalWords(totalWords + 1);
                 if (text.slice(0, e.target.value.length).join("") === e.target.value) setCorrectWords(correctWords + 1)
                 else setWrongWords(wrongWords + 1)
-                console.log(correctWords + " correct words and " + wrongWords + " wrong words")
+                // console.log(correctWords + " correct words and " + wrongWords + " wrong words")
                 setText(text.splice(e.target.value.length));
                 e.target.value = '';
                 letters.map(e => e.classList.remove('highLight', 'wrongLetter'))
@@ -81,7 +87,7 @@ export const Home = () => {
                     </div>
 
                     <div className='write'>
-                        <input type={"text"} onChange={(e) => typed(e)} on/>
+                        <input type={"text"} onChange={(e) => typed(e)} />
                         <div>{correctWords}</div>
                     </div>
 
@@ -91,7 +97,7 @@ export const Home = () => {
                     </div>
                 </div>
                 :
-                <Output correctWords={correctWords} totalWords={totalWords} time={10} wrongWords={wrongWords} />
+                <Output correctWords={correctWords} totalWords={totalWords} time={60} wrongWords={wrongWords} />
             }
         </>
     )
