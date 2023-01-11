@@ -1,0 +1,39 @@
+.nav-container {
+    width: 85%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1em;
+}
+
+header {
+    position: fixed;
+    width: 100%;
+    background-color: #3F4757;
+}
+
+.main-logo {
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.nav-container > nav {
+    display: flex;
+    gap: 3em;
+}
+
+.nav-container > nav > a:hover {
+    color: white;
+}
+
+.profile-pic {
+    border: 1px solid white;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+a {
+    text-decoration: none;
+}
