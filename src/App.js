@@ -4,6 +4,7 @@ import { Home } from './pages/home';
 import { Error } from './pages/error';
 import { Output } from './pages/output';
 import { QueryClient, QueryClientProvider } from 'react-query'
+import { Navbar } from './components/navbar';
 
 function App() {
 
@@ -20,6 +21,7 @@ function App() {
       <QueryClientProvider client={client}>
         <></>
         <Router>
+          <Navbar />
           <Routes>
             <Route path='/' element={<Home />} />
             <Route path='/result' element={<Output />} />
