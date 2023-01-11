@@ -5,6 +5,7 @@ import '../assets/styles/home.css'
 import useAPI from '../custom-hook/useSentence'
 import { useEffect, useState } from 'react'
 import { Info, Output } from './output'
+import { Loader } from '../components/Loader'
 
 
 export const Home = () => {
@@ -33,6 +34,21 @@ export const Home = () => {
             });
         }, 1000)
     }
+
+
+    const scrollDown = () => {
+        const testSection = document.querySelector('.test-section');
+        testSection.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // scroll 100vh after 1 second
+    useEffect(() => {
+        setTimeout(() => {
+            scrollDown();
+        }, 700);
+    }, []);
+
+
 
     useEffect(() => {
         setText([...String(data)].filter(e => e !== '\n'));
@@ -82,11 +98,11 @@ export const Home = () => {
             <div className="hero-section">
                 <h1>QWERTY-MAN</h1>
                 <p>The All-round Typing Practice Site.</p>
-                <img src={arrow} alt='arrow' />
+                <img src={arrow} alt='arrow' onClick={scrollDown} />
             </div>
 
             {!testFinished ?
-                <div className='test-section'>
+                <div className='test-section' id='test-section'>
 
                     {/* TImer section */}
                     <div className='timer-section'>
@@ -101,7 +117,9 @@ export const Home = () => {
                     </div>
 
                     <div className='sentence'>
-                        <Words sentence={text} />
+                        {isLoading ? <Loader /> :
+                            <Words sentence={text} />
+                        }
                     </div>
 
                     <div className='write'>
