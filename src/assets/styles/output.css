@@ -1,0 +1,74 @@
+.output-container {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.main-data {
+    display: flex;
+    justify-content: center;
+    gap: 5em;
+    align-items: center;
+}
+
+.speed-div {
+    border: 10px solid #949BAB;
+    border-radius: 50%;
+    font-size: 4rem;
+    padding: 1em;
+    height: 250px;
+    width: 250px;
+    color: white;
+}
+
+.speed-div .speed {
+    font-size: 7rem;
+    font-weight: bold;
+}
+
+.additional-info-container {
+    display: flex;
+    background-color: #949BAB;
+    width: 400px;
+    justify-content: space-between;
+    font-size: 2rem;
+    margin: 1em;
+    padding: .2em;
+    font-weight: bold;
+}
+
+.additional-info-container>.type {
+    color: #3F4757;
+    padding: 10px 0;
+    width: 60%;
+}
+
+.additional-info-container>.data {
+    background-color: #3F4757;
+    color: #fff;
+    width: 40%;
+    padding: 10px 0;
+}
+
+.effect:hover {
+    color: white
+}
+
+.retryBtn {
+    background: transparent;
+    border: none;
+    outline: none;
+    font-size: 2rem;
+    color: #949BAB;
+    padding: 10px;
+}
+.retryBtn > img {
+    height: 30px;
+    width: 30px;
+    display: inline-block;
+}
+
+.retryBtn:hover {
+    color: white;
+}
