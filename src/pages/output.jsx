@@ -1,16 +1,50 @@
 import '../assets/styles/output.css'
 import retryBtn from '../assets/images/retry.png'
+import { useAuthState } from 'react-firebase-hooks/auth'
+
+// Firestore imports for db
+import { auth, db } from "../config/firebase";
+import { addDoc, collection } from "firebase/firestore"
+import { useEffect } from 'react';
 
 export const Output = (props) => {
     const netSpeed = Number(props.correctWords) / (Number(props.time) / 60);
     const grossSpeed = props.totalWords / (props.time / 60);
     const accuracy = netSpeed * 100 / grossSpeed;
-    console.log(`Correct words: ${props.correctWords}\nWrong words: ${props.wrongWords}\nnet speed: ${netSpeed}\nGross speed: ${grossSpeed}\nAccuracy: ${accuracy}`)
-    console.log((props.time), typeof props.time)
+
+    // Loged in user
+    const [user] = useAuthState(auth);
 
     const reload = () => {
         window.navigation.reload();
     }
+
+    // Firebase upload
+
+    // Document reference
+    const postRef = collection(db, "timeline-data");
+
+    // Upload funtion
+    const uploadToDb = async (data) => {
+
+        const now = new Date();
+
+        await addDoc(postRef, {
+            speed: data.netSpeed,
+            userId: user.uid,
+            accuracy: data.accuracy.toFixed(2),
+            date: `${now.getDate()}-${now.getMonth() + 1}-${now.getFullYear()}`
+        })
+    }
+
+    useEffect(() => {
+        uploadToDb({ netSpeed, accuracy })
+        console.log("Uploading data...")
+    }, [netSpeed, accuracy])
+
+
+
+
     return (
         <div className='output-container'>
 
