@@ -5,7 +5,7 @@ import { useAuthState } from 'react-firebase-hooks/auth'
 // Firestore imports for db
 import { auth, db } from "../config/firebase";
 import { addDoc, collection } from "firebase/firestore"
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 export const Output = (props) => {
     const netSpeed = Number(props.correctWords) / (Number(props.time) / 60);
@@ -19,28 +19,31 @@ export const Output = (props) => {
         window.navigation.reload();
     }
 
-    // Firebase upload
+    // Firebase upload *********
 
     // Document reference
     const postRef = collection(db, "timeline-data");
 
-    // Upload funtion
-    const uploadToDb = async (data) => {
+    // Check if uploaded
+    const [uploaded, setUploaded] = useState(false)
 
-        const now = new Date();
-
-        await addDoc(postRef, {
-            speed: data.netSpeed,
-            userId: user.uid,
-            accuracy: data.accuracy.toFixed(2),
-            date: `${now.getDate()}-${now.getMonth() + 1}-${now.getFullYear()}`
-        })
-    }
-
+    // Upload the result in firestore
     useEffect(() => {
+        // Upload funtion
+        const uploadToDb = async (data) => {
+
+            const now = new Date();
+
+            await addDoc(postRef, {
+                speed: data.netSpeed,
+                userId: user?.uid,
+                accuracy: data.accuracy.toFixed(2),
+                date: `${now.getDate()}-${now.getMonth() + 1}-${now.getFullYear()}`
+            })
+        }
+
         uploadToDb({ netSpeed, accuracy })
-        console.log("Uploading data...")
-    }, [netSpeed, accuracy])
+    }, [props])
 
 
 
