@@ -1,6 +1,6 @@
-import arrow from '../assets/arrow.png'
-import retryImg from '../assets/retry.png'
-import retryImgWhite from '../assets/retry-white.png'
+import arrow from '../assets/images/arrow.png'
+import retryImg from '../assets/images/retry.png'
+import retryImgWhite from '../assets/images/retry-white.png'
 import '../assets/styles/home.css'
 import useAPI from '../custom-hook/useSentence'
 import { useEffect, useState } from 'react'
@@ -37,8 +37,14 @@ export const Home = () => {
 
 
     const scrollDown = () => {
-        const testSection = document.querySelector('.test-section');
-        testSection.scrollIntoView({ behavior: 'smooth' });
+        if (!testFinished) {
+            const testSection = document.querySelector('.test-section');
+            testSection.scrollIntoView({ behavior: 'smooth' });
+        }
+        else {
+            const outputSection = document.querySelector('.output-container');
+            outputSection.scrollIntoView({ behavior: 'smooth' });
+        }
     }
 
     // scroll 100vh after 1 second
@@ -123,7 +129,7 @@ export const Home = () => {
                     </div>
 
                     <div className='write'>
-                        <input type={"text"} onChange={(e) => typed(e)} id="input-text" />
+                        <input type={"text"} onChange={(e) => typed(e)} id="input-text" autoComplete='off' autoFocus="on" />
                     </div>
 
                     <div className='RetryBtn' onClick={() => window.navigation.reload()}>

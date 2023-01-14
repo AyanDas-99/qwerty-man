@@ -1,5 +1,5 @@
 import '../assets/styles/output.css'
-import retryBtn from '../assets/retry.png'
+import retryBtn from '../assets/images/retry.png'
 
 export const Output = (props) => {
     const netSpeed = Number(props.correctWords) / (Number(props.time) / 60);
@@ -43,7 +43,6 @@ export const Output = (props) => {
 
 
 export const Info = (props) => {
-    console.log(props.extension)
     return (
         <div className='additional-info-container'>
             <div className='type'>{props.type}</div>

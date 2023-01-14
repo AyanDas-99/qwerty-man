@@ -18,16 +18,16 @@ header {
     font-weight: bold;
 }
 
-.nav-container > nav {
+.nav-container>nav {
     display: flex;
     gap: 3em;
 }
 
-.nav-container > nav > a:hover {
+.nav-container>nav>a:hover {
     color: white;
 }
 
-.profile-pic {
+.profile-pic>img {
     border: 1px solid white;
     width: 40px;
     height: 40px;
@@ -36,4 +36,61 @@ header {
 
 a {
     text-decoration: none;
+}
+
+.login-container {
+    position: absolute;
+    top: 5em;
+    right: 4em;
+    border-radius: 15px;
+    padding: 1em;
+    box-shadow: 0 0 10px black;
+    background-color: #3F4757;
+}
+
+.login-container>.username {
+    border-bottom: 2px solid grey;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1em;
+    padding: 10px;
+    font-weight: bold;
+    color: white;
+}
+
+.login-container>.actions {
+    padding: 10px;
+}
+
+.login-container>.actions>.log {
+    margin: .5em 0;
+    padding: 10px;
+    border-radius: 10px;
+    font-weight: bold;
+    color: white;
+}
+
+.login-container>.actions>.log:hover {
+    cursor: pointer;
+}
+
+.blue:hover {
+    background-color: #3F6ACE;
+}
+
+.red:hover {
+    background-color: #C51010;
+}
+
+.signinBtn {
+    background: transparent;
+    color: #A59F9F;
+    border: none;
+    outline: none;
+    font-size: 1.2rem;
+}
+
+.signinBtn:hover {
+    color: white;
 }
