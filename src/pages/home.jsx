@@ -1,5 +1,4 @@
 import arrow from '../assets/images/arrow.png'
-import retryImg from '../assets/images/retry.png'
 import retryImgWhite from '../assets/images/retry-white.png'
 import '../assets/styles/home.css'
 import useAPI from '../custom-hook/useSentence'
