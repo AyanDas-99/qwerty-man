@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { auth, provider } from '../config/firebase'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { Login } from './login'
-import { useEffect, useState, useRef } from 'react'
+import { useEffect, useState } from 'react'
 import { signInWithPopup } from 'firebase/auth'
 
 
