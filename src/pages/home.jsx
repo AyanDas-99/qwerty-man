@@ -14,7 +14,7 @@ export const Home = () => {
     const [correctWords, setCorrectWords] = useState(0);
     const [wrongWords, setWrongWords] = useState(0);
     const [text, setText] = useState([]);
-    const [time, setTime] = useState(60);
+    const [time, setTime] = useState(5);
     const [seconds, setSeconds] = useState(time);
     const [testFinished, setTestFinished] = useState(false);
     const [hasRun, setHasRun] = useState(false);
@@ -90,7 +90,6 @@ export const Home = () => {
                 setTotalWords(totalWords + 1);
                 if (text.slice(0, e.target.value.length).join("") === e.target.value) setCorrectWords(correctWords + 1)
                 else setWrongWords(wrongWords + 1)
-                // console.log(correctWords + " correct words and " + wrongWords + " wrong words")
                 setText(text.splice(e.target.value.length));
                 e.target.value = '';
                 letters.map(e => e.classList.remove('highLight', 'wrongLetter'))
