@@ -6,7 +6,6 @@ import { Login } from './login'
 import { useEffect, useState } from 'react'
 import { signInWithPopup } from 'firebase/auth'
 
-
 export const Navbar = () => {
     const [user] = useAuthState(auth);
     const [isvisible, setIsVisible] = useState(false);
@@ -20,7 +19,6 @@ export const Navbar = () => {
         const handler = (e) => {
             if (e.target.className !== 'dp' && !e.target.classList.contains('no')) {
                 setIsVisible(false);
-                console.log(e.target.className)
             }
         };
         document.addEventListener("click", handler);

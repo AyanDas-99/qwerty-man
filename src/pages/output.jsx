@@ -1,16 +1,61 @@
 import '../assets/styles/output.css'
 import retryBtn from '../assets/images/retry.png'
+import { useAuthState } from 'react-firebase-hooks/auth'
+
+// Firestore imports for db
+import { auth, db } from "../config/firebase";
+import { addDoc, collection } from "firebase/firestore"
+import { useEffect } from 'react';
+
+// Chart Import
+import LineChart from '../components/LineChart';
+import useGetTimeline from '../custom-hook/useGetTimeline';
+
 
 export const Output = (props) => {
     const netSpeed = Number(props.correctWords) / (Number(props.time) / 60);
     const grossSpeed = props.totalWords / (props.time / 60);
     const accuracy = netSpeed * 100 / grossSpeed;
-    console.log(`Correct words: ${props.correctWords}\nWrong words: ${props.wrongWords}\nnet speed: ${netSpeed}\nGross speed: ${grossSpeed}\nAccuracy: ${accuracy}`)
-    console.log((props.time), typeof props.time)
+
+    // formated data for chart
+
+    // Loged in user
+    const [user] = useAuthState(auth);
 
     const reload = () => {
         window.navigation.reload();
     }
+
+    // Document reference
+    const postRef = collection(db, "timeline-data");
+
+    const { timeline } = useGetTimeline(user.uid);
+    // Upload the result in firestore
+    useEffect(() => {
+        // Upload funtion
+        const uploadToDb = async (data) => {
+
+            const now = new Date();
+            try {
+
+                await addDoc(postRef, {
+                    speed: data.netSpeed,
+                    userId: user?.uid,
+                    accuracy: data.accuracy.toFixed(2),
+                    date: `${now.getDate()}-${now.getMonth() + 1}-${now.getFullYear()}`
+                })
+                console.log("uploading to bd..")
+            }
+            catch (e) {
+                console.log(e)
+            }
+
+        }
+
+        uploadToDb({ netSpeed, accuracy })
+    }, [])
+
+
     return (
         <div className='output-container'>
 
@@ -32,6 +77,12 @@ export const Output = (props) => {
                     <Info type={'Wrong Words'} data={props.wrongWords} extension={""} />
                 </div>
             </div>
+
+            {/* Chart */}
+
+            {timeline &&
+                <LineChart timeline={timeline} type="speed" />
+            }
 
             {/* Retry Button */}
             <div className='controls'>
