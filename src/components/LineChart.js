@@ -4,13 +4,17 @@ import { useState, useEffect } from 'react';
 
 const LineChart = ({ timeline }) => {
     const [chartData, setChartdata] = useState(null)
+    const [userdata, setUserdata] = useState([]);
+
+    console.log(userdata)
     useEffect(() => {
         if (timeline.length !== 0) {
+            setUserdata(timeline.sort((a, b) => new Date(a.date) - new Date(b.date)));
             setChartdata({
-                labels: timeline.map(data => data.date.split('-')[0]),
+                labels: userdata.map(data => data.date),
                 datasets: [{
                     label: "speed",
-                    data: timeline.map(data => data.speed),
+                    data: userdata.map(data => data.speed),
                 }]
             })
         }
