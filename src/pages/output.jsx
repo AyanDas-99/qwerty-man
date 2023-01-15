@@ -47,7 +47,7 @@ export const Output = (props) => {
         }
 
         uploadToDb({ netSpeed, accuracy })
-    },)
+    }, [])
 
 
     return (
