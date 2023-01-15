@@ -4,13 +4,24 @@ import { useAuthState } from 'react-firebase-hooks/auth'
 
 // Firestore imports for db
 import { auth, db } from "../config/firebase";
-import { addDoc, collection } from "firebase/firestore"
+import { addDoc, collection, getDocs, query, where } from "firebase/firestore"
 import { useEffect, useState } from 'react';
+
+// Chart Import
+import LineChart from '../components/LineChart';
+import useGetTimeline from '../custom-hook/useGetTimeline';
+
 
 export const Output = (props) => {
     const netSpeed = Number(props.correctWords) / (Number(props.time) / 60);
     const grossSpeed = props.totalWords / (props.time / 60);
     const accuracy = netSpeed * 100 / grossSpeed;
+
+    // user timeline data
+    const [timeline, setTimeline] = useState([]);
+
+    // formated data for chart
+    const [chartdata, setChartdata] = useState(null);
 
     // Loged in user
     const [user] = useAuthState(auth);
@@ -20,13 +31,22 @@ export const Output = (props) => {
     }
 
     // Firebase upload *********
+    const userRef = collection(db, "timeline-data");
+    const getUserQuery = query(userRef, where('userId', '==', user.uid));
 
     // Document reference
     const postRef = collection(db, "timeline-data");
 
-    // Check if uploaded
-    const [uploaded, setUploaded] = useState(false)
+    // Get data from db
+    const getTimelineData = async () => {
+        const data = await getDocs(getUserQuery);
+        setTimeline(data.docs.map((doc) => doc.data()))
+    }
 
+    const {timelinedata} = useGetTimeline(user.uid);
+    console.log(timelinedata)
+    console.log(timeline)
+    console.log(chartdata)
     // Upload the result in firestore
     useEffect(() => {
         // Upload funtion
@@ -40,10 +60,26 @@ export const Output = (props) => {
                 accuracy: data.accuracy.toFixed(2),
                 date: `${now.getDate()}-${now.getMonth() + 1}-${now.getFullYear()}`
             })
+
         }
 
         uploadToDb({ netSpeed, accuracy })
-    }, [props])
+    }, [])
+
+    useEffect(() => {
+        getTimelineData()
+    }, [])
+
+    // set data for chart
+    useEffect(() => {
+        setChartdata({
+            labels: timeline.map(data => data.date.split('-')[0]),
+            datasets: [{
+                label: "speed",
+                data: timeline.map(data => data.speed),
+            }]
+        })
+    }, [timeline])
 
 
 
@@ -69,6 +105,12 @@ export const Output = (props) => {
                     <Info type={'Wrong Words'} data={props.wrongWords} extension={""} />
                 </div>
             </div>
+
+            {/* Chart */}
+
+            {chartdata &&
+                <LineChart chartData={chartdata} />
+            }
 
             {/* Retry Button */}
             <div className='controls'>
