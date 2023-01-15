@@ -4,8 +4,8 @@ import { useAuthState } from 'react-firebase-hooks/auth'
 
 // Firestore imports for db
 import { auth, db } from "../config/firebase";
-import { addDoc, collection, getDocs, query, where } from "firebase/firestore"
-import { useEffect, useState } from 'react';
+import { addDoc, collection } from "firebase/firestore"
+import { useEffect } from 'react';
 
 // Chart Import
 import LineChart from '../components/LineChart';
@@ -17,11 +17,7 @@ export const Output = (props) => {
     const grossSpeed = props.totalWords / (props.time / 60);
     const accuracy = netSpeed * 100 / grossSpeed;
 
-    // user timeline data
-    const [timeline, setTimeline] = useState([]);
-
     // formated data for chart
-    const [chartdata, setChartdata] = useState(null);
 
     // Loged in user
     const [user] = useAuthState(auth);
@@ -30,23 +26,10 @@ export const Output = (props) => {
         window.navigation.reload();
     }
 
-    // Firebase upload *********
-    const userRef = collection(db, "timeline-data");
-    const getUserQuery = query(userRef, where('userId', '==', user.uid));
-
     // Document reference
     const postRef = collection(db, "timeline-data");
 
-    // Get data from db
-    const getTimelineData = async () => {
-        const data = await getDocs(getUserQuery);
-        setTimeline(data.docs.map((doc) => doc.data()))
-    }
-
-    const {timelinedata} = useGetTimeline(user.uid);
-    console.log(timelinedata)
-    console.log(timeline)
-    console.log(chartdata)
+    const { timeline } = useGetTimeline(user.uid);
     // Upload the result in firestore
     useEffect(() => {
         // Upload funtion
@@ -64,24 +47,7 @@ export const Output = (props) => {
         }
 
         uploadToDb({ netSpeed, accuracy })
-    }, [])
-
-    useEffect(() => {
-        getTimelineData()
-    }, [])
-
-    // set data for chart
-    useEffect(() => {
-        setChartdata({
-            labels: timeline.map(data => data.date.split('-')[0]),
-            datasets: [{
-                label: "speed",
-                data: timeline.map(data => data.speed),
-            }]
-        })
-    }, [timeline])
-
-
+    },)
 
 
     return (
@@ -108,9 +74,9 @@ export const Output = (props) => {
 
             {/* Chart */}
 
-            {chartdata &&
-                <LineChart chartData={chartdata} />
-            }
+            {/* {chartdata && */}
+            <LineChart timeline={timeline} />
+            {/* } */}
 
             {/* Retry Button */}
             <div className='controls'>
