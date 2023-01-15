@@ -36,13 +36,19 @@ export const Output = (props) => {
         const uploadToDb = async (data) => {
 
             const now = new Date();
+            try {
 
-            await addDoc(postRef, {
-                speed: data.netSpeed,
-                userId: user?.uid,
-                accuracy: data.accuracy.toFixed(2),
-                date: `${now.getDate()}-${now.getMonth() + 1}-${now.getFullYear()}`
-            })
+                await addDoc(postRef, {
+                    speed: data.netSpeed,
+                    userId: user?.uid,
+                    accuracy: data.accuracy.toFixed(2),
+                    date: `${now.getDate()}-${now.getMonth() + 1}-${now.getFullYear()}`
+                })
+                console.log("uploading to bd..")
+            }
+            catch (e) {
+                console.log(e)
+            }
 
         }
 
@@ -74,9 +80,9 @@ export const Output = (props) => {
 
             {/* Chart */}
 
-            {/* {chartdata && */}
-            <LineChart timeline={timeline} />
-            {/* } */}
+            {timeline &&
+                <LineChart timeline={timeline} type="speed" />
+            }
 
             {/* Retry Button */}
             <div className='controls'>
