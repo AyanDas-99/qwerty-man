@@ -5,6 +5,7 @@ import { useAuthState } from 'react-firebase-hooks/auth'
 import { Login } from './login'
 import { useEffect, useState } from 'react'
 import { signInWithPopup } from 'firebase/auth'
+import useGetTimeline from '../custom-hook/useGetTimeline'
 
 
 export const Navbar = () => {
@@ -28,6 +29,9 @@ export const Navbar = () => {
             document.removeEventListener("click", handler);
         }
     })
+
+    const { timeline } = useGetTimeline(user.uid);
+    console.log(timeline)
 
     return (
         <header>
