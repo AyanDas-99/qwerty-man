@@ -5,8 +5,6 @@ import { useAuthState } from 'react-firebase-hooks/auth'
 import { Login } from './login'
 import { useEffect, useState } from 'react'
 import { signInWithPopup } from 'firebase/auth'
-import useGetTimeline from '../custom-hook/useGetTimeline'
-
 
 export const Navbar = () => {
     const [user] = useAuthState(auth);
@@ -21,7 +19,6 @@ export const Navbar = () => {
         const handler = (e) => {
             if (e.target.className !== 'dp' && !e.target.classList.contains('no')) {
                 setIsVisible(false);
-                console.log(e.target.className)
             }
         };
         document.addEventListener("click", handler);
@@ -29,9 +26,6 @@ export const Navbar = () => {
             document.removeEventListener("click", handler);
         }
     })
-
-    const { timeline } = useGetTimeline(user.uid);
-    console.log(timeline)
 
     return (
         <header>
