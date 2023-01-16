@@ -30,7 +30,7 @@ export const Output = (props) => {
     // Document reference
     const postRef = collection(db, "timeline-data");
 
-    const { timeline } = useGetTimeline(user.uid);
+    const { timeline } = useGetTimeline(user?.uid);
     // Upload the result in firestore
     useEffect(() => {
         // Upload funtion
@@ -80,7 +80,7 @@ export const Output = (props) => {
                 </div>
 
                 {/* Chart */}
-                {timeline &&
+                {timeline && user &&
                     <div className='charts'>
                         <LineChart timeline={timeline} />
                         <AccuracyChart timeline={timeline} />
