@@ -11,7 +11,10 @@ const AccuracyChart = ({ timeline }) => {
         }]
     }
 
-    return <Line data={chartData} className="chart"/>
+    const options = {
+        color: 'white',
+    }
+    return <Line data={chartData} className="chart" options={options} />
 }
 
 

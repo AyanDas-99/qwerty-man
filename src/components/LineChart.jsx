@@ -12,8 +12,11 @@ const LineChart = ({ timeline }) => {
             data: timelineData.map(data => data.speed),
         }]
     }
+    const options = {
+        color: 'white'
+    }
 
-    return <Line data={chartData} className="chart" />
+    return <Line data={chartData} className="chart" options={options}/>
 }
 
 
