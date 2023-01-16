@@ -29,8 +29,8 @@ export const Output = (props) => {
 
     // Document reference
     const postRef = collection(db, "timeline-data");
-
     const { timeline } = useGetTimeline(user?.uid);
+
     // Upload the result in firestore
     useEffect(() => {
         // Upload funtion
@@ -48,13 +48,14 @@ export const Output = (props) => {
                 console.log("uploading to bd..")
             }
             catch (e) {
-                console.log(e)
+                console.error(e)
             }
 
         }
 
         uploadToDb({ netSpeed, accuracy })
     }, [])
+
 
 
     return (
