@@ -2,6 +2,7 @@ import './App.css';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { Home } from './pages/home';
 import { Error } from './pages/error';
+import { About } from './pages/about';
 import { Output } from './pages/output';
 import { QueryClient, QueryClientProvider } from 'react-query'
 import { Navbar } from './components/navbar';
@@ -25,6 +26,7 @@ function App() {
           <Routes>
             <Route path='/' element={<Home />} />
             <Route path='/result' element={<Output />} />
+            <Route path='/about' element={<About />} />
             <Route path='*' element={<Error />} />
           </Routes>
         </Router>
