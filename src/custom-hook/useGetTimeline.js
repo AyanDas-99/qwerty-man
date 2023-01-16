@@ -3,6 +3,7 @@ import { db } from '../config/firebase'
 import { getDocs, collection, where, query } from "firebase/firestore"
 
 const useGetTimeline = (userId) => {
+    if (!userId) userId = null;
     const [timeline, setTimeline] = useState([]);
     const userRef = collection(db, "timeline-data");
     const getUserQuery = query(userRef, where('userId', '==', userId));
