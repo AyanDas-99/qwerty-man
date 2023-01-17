@@ -44,6 +44,7 @@
     display: flex;
     gap: 2em;
     padding: 2em;
+    justify-content: center;
 }
 
 .flex img {
