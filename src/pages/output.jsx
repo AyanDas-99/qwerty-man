@@ -10,6 +10,7 @@ import { useEffect } from 'react';
 // Chart Import
 import LineChart from '../components/LineChart';
 import useGetTimeline from '../custom-hook/useGetTimeline';
+import AccuracyChart from '../components/accuracyChart';
 
 
 export const Output = (props) => {
@@ -28,8 +29,8 @@ export const Output = (props) => {
 
     // Document reference
     const postRef = collection(db, "timeline-data");
+    const { timeline } = useGetTimeline(user?.uid);
 
-    const { timeline } = useGetTimeline(user.uid);
     // Upload the result in firestore
     useEffect(() => {
         // Upload funtion
@@ -47,7 +48,7 @@ export const Output = (props) => {
                 console.log("uploading to bd..")
             }
             catch (e) {
-                console.log(e)
+                console.error(e)
             }
 
         }
@@ -56,33 +57,37 @@ export const Output = (props) => {
     }, [])
 
 
+
     return (
         <div className='output-container'>
+            <div className='flex-div'>
+                {/* Main result */}
+                <div className='main-data'>
 
-            {/* Main result */}
-            <div className='main-data'>
+                    {/* Main Speed */}
+                    <div className="speed-div effect">
+                        <p className='speed'>{netSpeed}</p>
+                        <p>WPM</p>
+                    </div>
 
-                {/* Main Speed */}
-                <div className="speed-div effect">
-                    <p className='speed'>{netSpeed}</p>
-                    <p>WPM</p>
+
+                    {/*  Additional Data*/}
+                    <div className='additional'>
+                        <Info type="Accuracy" data={accuracy.toFixed(2)} extension="%" />
+                        <Info type={'Raw Speed'} data={grossSpeed} extension={"WPM"} />
+                        <Info type={'Correct Words'} data={props.correctWords} extension={""} />
+                        <Info type={'Wrong Words'} data={props.wrongWords} extension={""} />
+                    </div>
                 </div>
 
-
-                {/*  Additional Data*/}
-                <div className='additional'>
-                    <Info type="Accuracy" data={accuracy.toFixed(2)} extension="%" />
-                    <Info type={'Raw Speed'} data={grossSpeed} extension={"WPM"} />
-                    <Info type={'Correct Words'} data={props.correctWords} extension={""} />
-                    <Info type={'Wrong Words'} data={props.wrongWords} extension={""} />
-                </div>
+                {/* Chart */}
+                {timeline && user &&
+                    <div className='charts'>
+                        <LineChart timeline={timeline} />
+                        <AccuracyChart timeline={timeline} />
+                    </div>
+                }
             </div>
-
-            {/* Chart */}
-
-            {timeline &&
-                <LineChart timeline={timeline} type="speed" />
-            }
 
             {/* Retry Button */}
             <div className='controls'>
@@ -90,8 +95,8 @@ export const Output = (props) => {
             </div>
         </div>
     )
-}
 
+}
 
 export const Info = (props) => {
     return (
