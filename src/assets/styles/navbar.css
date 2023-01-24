@@ -1,97 +1,109 @@
 .nav-container {
-    width: 85%;
-    margin: 0 auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1em;
+  width: 85%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1em;
 }
 
 header {
-    position: fixed;
-    width: 100%;
-    background-color: #3F4757;
-    top: 0;
+  position: fixed;
+  width: 100%;
+  background-color: #3f4757;
+  top: 0;
 }
 
 .main-logo {
-    font-size: 2rem;
-    font-weight: bold;
+  font-size: 2rem;
+  font-weight: bold;
 }
 
-.nav-container>nav {
-    display: flex;
-    gap: 3em;
+.nav-container > nav {
+  display: flex;
+  gap: 3em;
 }
 
-.nav-container>nav>a:hover {
-    color: white;
+.nav-container > nav > a {
+  transition: transform 200ms ease;
 }
 
-.profile-pic>img {
-    box-shadow: 0 0 5px black;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
+.nav-container > nav > a:hover {
+  color: white;
+  transform: translateY(5px);
+}
+
+.profile-pic > img {
+  box-shadow: 0 0 5px black;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+.nav-dp > img {
+  transition: transform 200ms ease;
+}
+.nav-dp > img:hover {
+  transform: scale(1.1);
 }
 
 a {
-    text-decoration: none;
+  text-decoration: none;
 }
 
 .login-container {
-    position: absolute;
-    top: 5em;
-    right: 4em;
-    border-radius: 15px;
-    padding: 1em;
-    box-shadow: 0 0 10px black;
-    background-color: #3F4757;
+  position: absolute;
+  top: 5em;
+  right: 4em;
+  border-radius: 15px;
+  padding: 1em;
+  box-shadow: 0 0 10px black;
+  background-color: #3f4757;
 }
 
-.login-container>.username {
-    border-bottom: 2px solid grey;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1em;
-    padding: 10px;
-    font-weight: bold;
-    color: white;
+.login-container > .username {
+  border-bottom: 2px solid grey;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1em;
+  padding: 10px;
+  font-weight: bold;
+  color: white;
 }
 
-.login-container>.actions {
-    padding: 10px;
+.login-container > .actions {
+  padding: 10px;
 }
 
-.login-container>.actions>.log {
-    margin: .5em 0;
-    padding: 10px;
-    border-radius: 10px;
-    font-weight: bold;
-    color: white;
+.login-container > .actions > .log {
+  margin: 0.5em 0;
+  padding: 10px;
+  border-radius: 10px;
+  font-weight: bold;
+  color: white;
+  transition: background-color 200ms ease;
 }
 
-.login-container>.actions>.log:hover {
-    cursor: pointer;
+.login-container > .actions > .log:hover {
+  cursor: pointer;
 }
 
 .blue:hover {
-    background-color: #3F6ACE;
+  background-color: #3f6ace;
 }
 
 .red:hover {
-    background-color: #C51010;
+  background-color: #c51010;
 }
 
 .signinBtn {
-    background: transparent;
-    color: #A59F9F;
-    border: none;
-    outline: none;
-    font-size: 1.2rem;
+  background: transparent;
+  color: #a59f9f;
+  border: none;
+  outline: none;
+  font-size: 1.2rem;
 }
 
 .signinBtn:hover {
-    color: white;
+  color: white;
 }
