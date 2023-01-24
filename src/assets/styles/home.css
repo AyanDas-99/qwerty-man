@@ -43,6 +43,11 @@
 
 .RetryBtn>img {
     width: 50px;
+    transition: transform 1s ease;
+}
+
+.RetryBtn>img:hover {
+    transform: rotate(360deg);
 }
 
 .RetryBtn:hover {
@@ -85,6 +90,7 @@
     border: none;
     background: transparent;
     color: #949BAB;
+    transition: color 200ms ease;
 }
 
 .option-item:hover {
@@ -107,3 +113,4 @@
         transform: translateY(0);
     }
 }
+
