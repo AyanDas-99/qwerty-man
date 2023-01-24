@@ -7,6 +7,7 @@ import { Output } from './pages/output';
 import { QueryClient, QueryClientProvider } from 'react-query'
 import { Navbar } from './components/navbar';
 import { Timeline } from './pages/timeline';
+import Contact from './pages/contact';
 
 function App() {
 
@@ -29,6 +30,7 @@ function App() {
             <Route path='/result' element={<Output />} />
             <Route path='/about' element={<About />} />
             <Route path='/timeline' element={<Timeline />} />
+            <Route path='/contact' element={<Contact />} />
             <Route path='*' element={<Error />} />
           </Routes>
         </Router>
