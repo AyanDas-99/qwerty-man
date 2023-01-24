@@ -1,0 +1,80 @@
+.contact-form {
+  width: fit-content;
+  margin: 7em auto 0;
+  background-color: rgba(40, 40, 49, 0.412);
+  padding: 2em;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+
+form .userInput {
+  border-radius: 10px;
+  padding: 10px;
+  font-weight: 600;
+  font-family: sans-serif;
+}
+
+
+
+form button {
+  padding: 10px;
+  margin: 0.5em;
+  color: white;
+  border-radius: 5px;
+  border: none;
+  font-size: 1.2rem;
+  font-weight: 550;
+  transition: transform 200ms ease;
+}
+
+form button:hover {
+  transform: scale(1.1);
+}
+
+.loadingBtn {
+  padding: 0 10px;
+}
+.loadingBtn img {
+  width: 35px;
+}
+
+.formBtns {
+  text-align: left;
+}
+
+.red {
+  background-color: rgb(209, 4, 4);
+}
+
+.blue {
+  background-color: #2382ff;
+}
+
+.errorMessage {
+  color: white;
+  font-weight: 600;
+  background-color: red;
+  padding: 10px;
+  margin: 10px;
+  border-radius: 5px;
+}
+
+.errorMessage img {
+  margin: 0;
+  padding: 0;
+}
+
+.errorDiv {
+  position: absolute;
+  top: 0;
+  width: 450px;
+}
+
+.confirmation {
+  margin-top: 7em;
+  font-size: 2rem;
+}
