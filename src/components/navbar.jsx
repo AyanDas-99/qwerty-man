@@ -34,13 +34,14 @@ export const Navbar = () => {
                     <div className='main-logo'>QWERTY-MAN</div>
                 </Link>
                 <nav className='navbar'>
+                    <Link to={'/'}>Home</Link>
                     <Link to={'/timeline'}>Timeline</Link>
                     <Link to={'/about'}>About Us</Link>
                     <Link to={'/contact'}>Talk To Us</Link>
                 </nav>
                 {user ?
                     <div className='user'>
-                        <div className='profile-pic' onClick={() => setIsVisible(!isvisible)}>
+                        <div className='profile-pic nav-dp' onClick={() => setIsVisible(!isvisible)}>
                             <img src={user.photoURL} alt="display profile" className='dp' />
                         </div>
                         {isvisible &&
