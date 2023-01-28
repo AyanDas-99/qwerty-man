@@ -1,7 +1,7 @@
 import "../assets/styles/timeline.css";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../config/firebase";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import AccuracyChart from "../components/accuracyChart";
 import LineChart from "../components/LineChart";
 import useGetTimeline from "../custom-hook/useGetTimeline";
@@ -88,6 +88,9 @@ const HistoryData = (props) => {
     year: years[0],
   });
 
+  console.log(userDate);
+  // console.log(days, months, years);
+
   return (
     <div className="history-data">
       <h3>HISTORY</h3>
@@ -98,9 +101,11 @@ const HistoryData = (props) => {
           name="day"
           onChange={(e) => {
             setUserDate({ ...userDate, day: e.target.value });
-            console.log(userDate);
           }}
         >
+          <option value={null} defaultChecked={true}>
+            --select day--
+          </option>
           {days.map((e) => (
             <option value={e} key={e}>
               {e}
@@ -113,6 +118,9 @@ const HistoryData = (props) => {
           name="month"
           onChange={(e) => setUserDate({ ...userDate, month: e.target.value })}
         >
+          <option value={null} defaultChecked={true}>
+            --select month--
+          </option>
           {months.map((e) => (
             <option value={e} key={e}>
               {e}
@@ -125,6 +133,9 @@ const HistoryData = (props) => {
           name="year"
           onChange={(e) => setUserDate({ ...userDate, year: e.target.value })}
         >
+          <option value={null} defaultChecked={true}>
+            --select year--
+          </option>
           {years.map((e) => (
             <option value={e} key={e}>
               {e}
@@ -134,16 +145,30 @@ const HistoryData = (props) => {
       </div>
 
       <div className="data-section">
-        {timelineData
-          .filter(
-            (e) =>
-              e.date === `${userDate.day}-${userDate.month}-${userDate.year}`
-          )
-          .map((e) => (
-            <p>
-              {e.speed} {e.date}
-            </p>
-          ))}
+        <table>
+          <thead>
+            <tr>
+              <td>Date</td>
+              <td>Speed</td>
+              <td>Accuracy</td>
+            </tr>
+          </thead>
+          <tbody>
+            {timelineData
+              .filter(
+                (e) =>
+                  e.date ===
+                  `${userDate.day}-${userDate.month}-${userDate.year}`
+              )
+              .map((e) => (
+                <tr>
+                  <td>{e.date}</td>
+                  <td>{e.speed}</td>
+                  <td>{e.accuracy}</td>
+                </tr>
+              ))}
+          </tbody>
+        </table>
       </div>
     </div>
   );
