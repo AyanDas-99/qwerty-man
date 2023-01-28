@@ -1,10 +1,11 @@
 import "../assets/styles/timeline.css";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../config/firebase";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import AccuracyChart from "../components/accuracyChart";
 import LineChart from "../components/LineChart";
 import useGetTimeline from "../custom-hook/useGetTimeline";
+import { useReducer } from "react";
 
 export const Timeline = () => {
   const [user] = useAuthState(auth);
@@ -58,6 +59,7 @@ const DataSection = (props) => {
 };
 
 const HistoryData = (props) => {
+  // Timeline data sorted by date
   const timelineData = props.timeline.sort(
     (a, b) =>
       new Date(
@@ -72,21 +74,36 @@ const HistoryData = (props) => {
       )
   );
 
-  const days = Array.from(
-    new Set(timelineData.map(({ date }) => date.split("-")[0]))
-  );
-  const months = Array.from(
-    new Set(timelineData.map(({ date }) => date.split("-")[1]))
-  );
-  const years = Array.from(
-    new Set(timelineData.map(({ date }) => date.split("-")[2]))
-  );
+  // days, months and years avaiblabe in data
+  const availableDates = {
+    days: Array.from(
+      new Set(timelineData.map(({ date }) => date.split("-")[0]))
+    ),
+    months: Array.from(
+      new Set(timelineData.map(({ date }) => date.split("-")[1]))
+    ),
+    years: Array.from(
+      new Set(timelineData.map(({ date }) => date.split("-")[2]))
+    ),
+  };
 
-  const [userDate, setUserDate] = useState({
-    day: days[0],
-    month: months[0],
-    year: years[0],
-  });
+  // user input for history date (Initial value)
+  const initialState = {
+    day: availableDates.days[0],
+    month: availableDates.months[0],
+    year: availableDates.years[0],
+  };
+
+  // user input reducer funtion
+  const reducer = (state, { type, payload }) => {
+    const validTypes = ["day", "month", "year"];
+    if (validTypes.includes(type)) {
+      return { ...state, [type]: payload };
+    } else throw new Error(`Unknown type: ${type}`);
+  };
+
+  // state for user input
+  const [userDate, dispatch] = useReducer(reducer, initialState);
 
   console.log(userDate);
   // console.log(days, months, years);
@@ -95,48 +112,51 @@ const HistoryData = (props) => {
     <div className="history-data">
       <h3>HISTORY</h3>
       <div className="date-selectors">
+        {/* Day selection */}
         <label for="day">Day</label>
         <select
           id="day"
           name="day"
-          onChange={(e) => {
-            setUserDate({ ...userDate, day: e.target.value });
-          }}
+          onChange={(e) => dispatch({ type: "day", payload: e.target.value })}
         >
           <option value={null} defaultChecked={true}>
             --select day--
           </option>
-          {days.map((e) => (
+          {availableDates.days.map((e) => (
             <option value={e} key={e}>
               {e}
             </option>
           ))}
         </select>
+
+        {/* Month selecton */}
         <label for="month">Month</label>
         <select
           id="month"
           name="month"
-          onChange={(e) => setUserDate({ ...userDate, month: e.target.value })}
+          onChange={(e) => dispatch({ type: "month", payload: e.target.value })}
         >
           <option value={null} defaultChecked={true}>
             --select month--
           </option>
-          {months.map((e) => (
+          {availableDates.months.map((e) => (
             <option value={e} key={e}>
               {e}
             </option>
           ))}
         </select>
+
+        {/* year selection */}
         <label for="year">Year</label>
         <select
           id="year"
           name="year"
-          onChange={(e) => setUserDate({ ...userDate, year: e.target.value })}
+          onChange={(e) => dispatch({ type: "year", payload: e.target.value })}
         >
           <option value={null} defaultChecked={true}>
             --select year--
           </option>
-          {years.map((e) => (
+          {availableDates.years.map((e) => (
             <option value={e} key={e}>
               {e}
             </option>
@@ -144,6 +164,7 @@ const HistoryData = (props) => {
         </select>
       </div>
 
+      {/* Data Table Section */}
       <div className="data-section">
         <table>
           <thead>
