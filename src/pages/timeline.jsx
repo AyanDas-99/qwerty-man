@@ -49,10 +49,15 @@ const DataSection = (props) => {
 
   return (
     <div className="data_section">
-      <button onClick={typeToggle}>{type}</button>
+      <div className="toggle">
+        <button onClick={typeToggle}>{type} </button>
+      </div>
       <div className="data">
-        <LineChart timeline={props.timeline} />
-        <AccuracyChart timeline={props.timeline} />
+        {type === "SPEED" ? (
+          <LineChart timeline={props.timeline} />
+        ) : (
+          <AccuracyChart timeline={props.timeline} />
+        )}
       </div>
     </div>
   );
@@ -185,7 +190,7 @@ const HistoryData = (props) => {
                 <tr>
                   <td>{e.date}</td>
                   <td>{e.speed}</td>
-                  <td>{e.accuracy}</td>
+                  <td>{e.accuracy} %</td>
                 </tr>
               ))}
           </tbody>
