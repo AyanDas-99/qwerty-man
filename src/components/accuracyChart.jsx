@@ -15,7 +15,7 @@ const AccuracyChart = ({ timeline }) => {
         }`
       )
   );
-  timelineData.map((e) => console.log(e.date));
+  // timelineData.map((e) => console.log(e.date));
   const chartData = {
     labels: timelineData.map((data) => data.date),
     datasets: [
