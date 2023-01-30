@@ -41,11 +41,8 @@ export const Home = () => {
     }
   };
 
-  // scroll 100vh after 1 second
   useEffect(() => {
-    setTimeout(() => {
       scrollDown();
-    }, 700);
   }, []);
 
   useEffect(() => {
@@ -119,6 +116,7 @@ export const Home = () => {
 
           <div className="sentence">
             {isLoading ? <Loader /> : <Words sentence={text} />}
+            {error && <p style={{color: 'red'}}>There is an error loading the sentence</p>}
           </div>
 
           <div className="write">
