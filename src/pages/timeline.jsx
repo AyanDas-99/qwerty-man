@@ -6,10 +6,14 @@ import AccuracyChart from "../components/accuracyChart";
 import LineChart from "../components/LineChart";
 import useGetTimeline from "../custom-hook/useGetTimeline";
 import { useReducer } from "react";
+import { useEffect } from "react";
+import calenderPic from "../assets/images/calender.svg";
 
 export const Timeline = () => {
   const [user] = useAuthState(auth);
   const { timeline } = useGetTimeline(user?.uid);
+
+  useEffect(() => window.scrollTo(0, 0), []);
 
   return (
     <div className="timeline-container">
@@ -63,6 +67,8 @@ const DataSection = (props) => {
   );
 };
 
+// ************** HISTORY DATA COMPONENT
+
 const HistoryData = (props) => {
   // Timeline data sorted by date
   const timelineData = props.timeline.sort(
@@ -97,20 +103,39 @@ const HistoryData = (props) => {
     day: availableDates.days[0],
     month: availableDates.months[0],
     year: availableDates.years[0],
+    isValid: false,
   };
 
   // user input reducer funtion
   const reducer = (state, { type, payload }) => {
     const validTypes = ["day", "month", "year"];
+    let newState;
     if (validTypes.includes(type)) {
-      return { ...state, [type]: payload };
+      newState = { ...state, [type]: payload };
     } else throw new Error(`Unknown type: ${type}`);
+
+    if (
+      !isNaN(newState.day) &&
+      !isNaN(newState.month) &&
+      !isNaN(newState.year)
+    ) {
+      newState = { ...newState, isValid: true };
+      console.log("true..");
+    } else newState = { ...newState, isValid: false };
+    console.log(
+      !isNaN(newState.day),
+      !isNaN(newState.month),
+      !isNaN(newState.year)
+    );
+
+    console.log(newState);
+    return newState;
   };
 
   // state for user input
   const [userDate, dispatch] = useReducer(reducer, initialState);
 
-  console.log(userDate);
+  // console.log(userDate);
   // console.log(days, months, years);
 
   return (
@@ -170,32 +195,39 @@ const HistoryData = (props) => {
       </div>
 
       {/* Data Table Section */}
-      <div className="data-section">
-        <table>
-          <thead>
-            <tr>
-              <td>Date</td>
-              <td>Speed</td>
-              <td>Accuracy</td>
-            </tr>
-          </thead>
-          <tbody>
-            {timelineData
-              .filter(
-                (e) =>
-                  e.date ===
-                  `${userDate.day}-${userDate.month}-${userDate.year}`
-              )
-              .map((e) => (
-                <tr>
-                  <td>{e.date}</td>
-                  <td>{e.speed}</td>
-                  <td>{e.accuracy} %</td>
-                </tr>
-              ))}
-          </tbody>
-        </table>
-      </div>
+      {userDate.isValid ? (
+        <div className="data-section">
+          <table>
+            <thead>
+              <tr>
+                <td>Date</td>
+                <td>Speed</td>
+                <td>Accuracy</td>
+              </tr>
+            </thead>
+            <tbody>
+              {timelineData
+                .filter(
+                  (e) =>
+                    e.date ===
+                    `${userDate.day}-${userDate.month}-${userDate.year}`
+                )
+                .map((e) => (
+                  <tr>
+                    <td>{e.date}</td>
+                    <td>{e.speed} WPM</td>
+                    <td>{e.accuracy} %</td>
+                  </tr>
+                ))}
+            </tbody>
+          </table>
+        </div>
+      ) : (
+        <div className="dateNotSelected">
+          <h2>Select Valid Date</h2>
+          <img src={calenderPic} alt="Date not selected" />
+        </div>
+      )}
     </div>
   );
 };
