@@ -8,6 +8,7 @@ import useGetTimeline from "../custom-hook/useGetTimeline";
 import { useReducer } from "react";
 import { useEffect } from "react";
 import calenderPic from "../assets/images/calender.svg";
+import toggleIcon from "../assets/images/change.svg";
 
 export const Timeline = () => {
   const [user] = useAuthState(auth);
@@ -54,7 +55,9 @@ const DataSection = (props) => {
   return (
     <div className="data_section">
       <div className="toggle">
-        <button onClick={typeToggle}>{type} </button>
+        <button onClick={typeToggle}>
+          {type} <img src={toggleIcon} alt="change type" />
+        </button>
       </div>
       <div className="data">
         {type === "SPEED" ? (
@@ -143,7 +146,7 @@ const HistoryData = (props) => {
       <h3>HISTORY</h3>
       <div className="date-selectors">
         {/* Day selection */}
-        <label for="day">Day</label>
+        <label htmlFor="day">Day</label>
         <select
           id="day"
           name="day"
@@ -153,14 +156,14 @@ const HistoryData = (props) => {
             --select day--
           </option>
           {availableDates.days.map((e) => (
-            <option value={e} key={e}>
-              {e}
-            </option>
+              <option value={e} key={e}>
+                {e}
+              </option>
           ))}
         </select>
 
         {/* Month selecton */}
-        <label for="month">Month</label>
+        <label htmlfor="month">Month</label>
         <select
           id="month"
           name="month"
@@ -177,7 +180,7 @@ const HistoryData = (props) => {
         </select>
 
         {/* year selection */}
-        <label for="year">Year</label>
+        <label htmlfor="year">Year</label>
         <select
           id="year"
           name="year"
