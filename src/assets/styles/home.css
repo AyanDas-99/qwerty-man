@@ -19,6 +19,7 @@
 .hero-section img {
     width: 150px;
     animation: move 1s ease-in-out infinite;
+    z-index: -1;
 }
 
 .hero-section img:hover {
