@@ -30,7 +30,11 @@ header {
 
 .nav-container > nav > a:hover {
   color: white;
-  transform: translateY(5px);
+  transform: translateY(3px);
+}
+
+.hamMenu {
+  display: none;
 }
 
 .profile-pic > img {
@@ -106,4 +110,34 @@ a {
 
 .signinBtn:hover {
   color: white;
+}
+
+@media only screen and (max-width: 850px) {
+  .nav-container {
+    width: 90%;
+  }
+
+  .hamMenu {
+    display: block;
+    width: 30px;
+    margin: 2em;
+  }
+
+  .navbar {
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    background-color: #464e5f;
+    height: 100vh;
+    width: 100%;
+    font-size: 1.4rem;
+    transform: translateX(100vw);
+    transition: transform 400ms ease-in-out;
+  }
+
+  .navClicked {
+    transform: translateX(0);
+  }
 }
