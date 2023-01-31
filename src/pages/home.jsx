@@ -42,7 +42,8 @@ export const Home = () => {
   };
 
   useEffect(() => {
-      scrollDown();
+    window.scrollTo(0, 0)
+    setTimeout(scrollDown, 1500)
   }, []);
 
   useEffect(() => {
@@ -91,7 +92,9 @@ export const Home = () => {
       <div className="hero-section">
         <h1>QWERTY-MAN</h1>
         <p>The All-round Typing Practice Site.</p>
-        <img src={arrow} alt="arrow" onClick={scrollDown} />
+        <div className="arrow">
+          <img src={arrow} alt="arrow" onClick={scrollDown} />
+        </div>
       </div>
 
       {!testFinished ? (
@@ -116,7 +119,11 @@ export const Home = () => {
 
           <div className="sentence">
             {isLoading ? <Loader /> : <Words sentence={text} />}
-            {error && <p style={{color: 'red'}}>There is an error loading the sentence</p>}
+            {error && (
+              <p style={{ color: "red" }}>
+                There is an error loading the sentence
+              </p>
+            )}
           </div>
 
           <div className="write">

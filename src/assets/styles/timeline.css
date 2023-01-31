@@ -1,7 +1,7 @@
 .timeline-container {
-  max-width: 1200px;
   margin: 6em auto;
   margin-top: 8em;
+  width: 90%;
 }
 
 .timeline-container > .profile {
@@ -15,7 +15,8 @@
 
 .timeline-container > .profile > img {
   border-radius: 50%;
-  width: 200px;
+  width: 10vw;
+  min-width: 100px;
 }
 
 .timeline-container > .profile > .user-details {
@@ -50,6 +51,7 @@
 .history-data {
   color: white;
   padding: 1em;
+  margin-top: 2em;
 }
 
 .history-data > .date-selectors {
@@ -124,10 +126,35 @@ tbody > tr:hover {
 
 .dateNotSelected > img {
   margin: 3em;
-  max-width: 500px;
-  width: auto;
+  max-width: 50vw;
 }
 
 .dateNotSelected > h2 {
   font-weight: lighter;
+}
+
+@media only screen and (max-width: 850px) {
+  .timeline-container > .profile {
+    display: block;
+  }
+
+  .timeline-container > .profile > .user-details {
+    text-align: center;
+    margin-top: 2em;
+    font-size: 1rem;
+    line-height: 30px;
+  }
+
+  .history-data > .date-selectors{
+    flex-direction: column;
+  }
+
+  .date-selectors > select {
+    font-size: 1rem;
+  }
+
+  .chart {
+    margin: 0;
+  }
+  
 }

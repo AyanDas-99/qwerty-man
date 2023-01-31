@@ -133,7 +133,7 @@ a {
     height: 100vh;
     width: 100%;
     font-size: 1.4rem;
-    transform: translateX(100vw);
+    transform: translateX(120vw);
     transition: transform 400ms ease-in-out;
   }
 

@@ -50,7 +50,7 @@ export const About = () => {
           </p>
         </section>
 
-        <h1>I built this</h1>
+        <h1>Tech Used</h1>
         <section className="section2">
           <div className="flex">
             <div className="how-part">
@@ -58,7 +58,7 @@ export const About = () => {
               <div className="techstack flex">
                 <div className="react-stack small">
                   <img src={reactLogo} alt="react logo" />
-                  <h4>Concepts are used in React</h4>
+                  <h4>React Concepts Used</h4>
                   <ul>
                     <li>useState</li>
                     <li>useEffect</li>
@@ -67,7 +67,7 @@ export const About = () => {
                 </div>
                 <div className="firebase-stack small">
                   <img src={firebaseLogo} alt="firebase logo" />
-                  <h4>Concepts are used in Firebase</h4>
+                  <h4>Firebase Concepts used</h4>
                   <ul>
                     <li>Authentication</li>
                     <li>Realtime Database</li>
