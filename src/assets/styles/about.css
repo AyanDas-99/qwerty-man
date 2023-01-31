@@ -1,22 +1,8 @@
 .about-container {
-  margin: 5em auto;
+  margin: 10em auto;
   color: white;
-  width: 90%;
-
-}
-
-.about-container > .header {
-  background-color: rgba(40, 40, 49, 0.412);
-  height: 30vh;
-  font-size: 2rem;
-  font-weight: bold;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 1em 0;
-}
-
-.content {
+  width: 80%;
+  line-height: 1.5rem;
 }
 
 .section1 {
@@ -49,6 +35,7 @@
   flex-wrap: wrap;
   justify-content: center;
   gap: 1em;
+  margin: 2em 0;
 }
 
 .flex {
@@ -103,7 +90,7 @@
 }
 
 @media only screen and (max-width: 850px) {
-  .how-part{
+  .how-part {
     width: 100%;
   }
 
@@ -114,5 +101,9 @@
   .who-part > .comment {
     width: 80%;
     margin: 2em auto;
+  }
+
+  .about-container {
+    width: 100%;
   }
 }
