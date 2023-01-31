@@ -59,18 +59,61 @@ export const About = () => {
                   <img src={reactLogo} alt="react logo" />
                   <h4>React Concepts Used</h4>
                   <ul>
-                    <li>useState</li>
-                    <li>useEffect</li>
-                    <li>react-router-dom</li>
+                    <a
+                      href="https://beta.reactjs.org/reference/react/useState"
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      <li>useState</li>
+                    </a>
+                    <a
+                      href="https://reactjs.org/docs/hooks-effect.html"
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      <li>useEffect</li>
+                    </a>
+                    <a
+                      href="https://reactrouter.com/"
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      <li>react-router-dom</li>
+                    </a>
+                    <a
+                      href="https://beta.reactjs.org/reference/react/useReducer"
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      <li>useReducer</li>
+                    </a>
                   </ul>
                 </div>
                 <div className="firebase-stack small">
                   <img src={firebaseLogo} alt="firebase logo" />
                   <h4>Firebase Concepts used</h4>
                   <ul>
-                    <li>Authentication</li>
-                    <li>Realtime Database</li>
-                    <li>react-firebase-hooks</li>
+                    <a
+                      href="https://firebase.google.com/docs/auth"
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      <li>Authentication</li>
+                    </a>
+                    <a
+                      href="https://firebase.google.com/docs/database"
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      <li>Realtime Databases</li>
+                    </a>
+                    <a
+                      href="https://www.npmjs.com/package/react-firebase-hooks"
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      <li>react-firebase-hooks</li>
+                    </a>
                   </ul>
                 </div>
               </div>
