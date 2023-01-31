@@ -80,6 +80,10 @@
   margin: 2em;
 }
 
+.techstack a:hover{
+  color: white;
+}
+
 .techstack ul {
   list-style: none;
 }
