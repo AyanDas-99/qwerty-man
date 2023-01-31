@@ -1,6 +1,28 @@
+.contact-container {
+  display: flex;
+  width: fit-content;
+  margin: 6em auto;
+  width: 80%;
+  justify-content: center;
+}
+
+.contact-container > .cover {
+  width: 50%;
+  background-image: url("../images/keyboard.png");
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.contact-container > .cover > h2 {
+  font-size: 2vw;
+  color: white;
+  font-family: sans-serif;
+}
+
 .contact-form {
   width: fit-content;
-  margin: 7em auto 0;
   background-color: rgba(40, 40, 49, 0.412);
   padding: 2em;
 }
@@ -12,14 +34,15 @@ form {
 }
 
 form .userInput {
-  padding: 10px;
+  padding: 10px 0;
   font-weight: 600;
   font-family: sans-serif;
   background-color: transparent;
   border: none;
-  border-bottom:1px solid rgba(255, 255, 255, 0.697);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.697);
   color: white;
   font-size: 1rem;
+  resize: none;
 }
 
 form .userInput::placeholder {
@@ -38,7 +61,7 @@ form button {
 }
 
 form button:hover {
-  transform: scale(1.1);
+  transform: scale(1.01);
 }
 
 .loadingBtn {
@@ -63,7 +86,7 @@ form button:hover {
 .errorMessage {
   color: white;
   font-weight: 600;
-  background-color: red;
+  background-color: rgba(255, 0, 0, 0.359);
   padding: 10px;
   margin: 10px;
   border-radius: 5px;
@@ -85,17 +108,31 @@ form button:hover {
   font-size: 2rem;
 }
 
+.mobileHeading {
+  display: none;
+}
+
 @media only screen and (max-width: 850px) {
+
+  .contact-container {
+    width: 95%;
+  }
+
   form .userInput {
+    width: 101%;
+  }
+
+  .formBtns > button {
     width: 100%;
   }
-
-  .contact-form h2 {
-    font-weight: 500;
-    font-size: 1.2rem;
+  
+  .mobileHeading {
+    display: block;
   }
+}
 
-  .formBtns {
-    text-align: center;
+@media only screen and (max-width: 1300px) {
+  .contact-container > .cover {
+    display: none;
   }
 }
