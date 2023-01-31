@@ -35,6 +35,12 @@ header {
 
 .hamMenu {
   display: none;
+  transition: transform 400ms ease;
+}
+.hamMenu:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+  filter: drop-shadow(0 0 5px black);
 }
 
 .profile-pic > img {
@@ -60,7 +66,7 @@ a {
   right: 4em;
   border-radius: 15px;
   padding: 1em;
-  box-shadow: 0 0 10px black;
+  box-shadow: 0 0 5px black;
   background-color: #3f4757;
 }
 
