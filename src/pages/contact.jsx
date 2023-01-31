@@ -62,49 +62,57 @@ const Contact = () => {
 
   if (!msgSent) {
     return (
-      <div className="contact-form">
-        <h2 style={{ marginBottom: "1em" }}>What's in your mind ?</h2>
-        {showError && (
-          <div className="errorDiv">
-            {errors.fullName && (
-              <ErrorBlock
-                message={errors.fullName.message}
-                setShowError={setShowError}
-              />
-            )}
-            {errors.message && <ErrorBlock message={errors.message.message} />}
-          </div>
-        )}
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <input
-            className="userInput"
-            type={"text"}
-            placeholder="Full Name"
-            {...register("fullName")}
-          />
+      <div className="contact-container">
+        <div className="cover">
+          <h2>What's in your mind?</h2>
+          <h2>I'd love to hear your thoughts</h2>
+        </div>
+        <div className="contact-form">
+          <h2 className="mobileHeading" style={{margin: '1em 0', color: 'white' }}>Share your thoughts</h2>
+          {showError && (
+            <div className="errorDiv">
+              {errors.fullName && (
+                <ErrorBlock
+                  message={errors.fullName.message}
+                  setShowError={setShowError}
+                />
+              )}
+              {errors.message && (
+                <ErrorBlock message={errors.message.message} />
+              )}
+            </div>
+          )}
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <input
+              className="userInput"
+              type={"text"}
+              placeholder="Full Name"
+              {...register("fullName")}
+            />
 
-          <textarea
-            className="userInput"
-            placeholder="Message"
-            cols={50}
-            rows={20}
-            {...register("message")}
-          />
-          <div className="formBtns">
-            <button className="red" type="reset">
-              Reset
-            </button>
-            {!msgSending ? (
-              <button className="blue" type="submit">
-                Send{" "}
+            <textarea
+              className="userInput"
+              placeholder="Message"
+              cols={50}
+              rows={20}
+              {...register("message")}
+            />
+            <div className="formBtns">
+              <button className="red" type="reset">
+                Reset
               </button>
-            ) : (
-              <button className="loadingBtn blue">
-                <img src={loader} alt="loader" />
-              </button>
-            )}
-          </div>
-        </form>
+              {!msgSending ? (
+                <button className="blue" type="submit">
+                  Send{" "}
+                </button>
+              ) : (
+                <button className="loadingBtn blue">
+                  <img src={loader} alt="loader" />
+                </button>
+              )}
+            </div>
+          </form>
+        </div>
       </div>
     );
   } else {
