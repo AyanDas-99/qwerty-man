@@ -12,7 +12,6 @@ export const About = () => {
 
   return (
     <div className="about-container">
-      <div className="header">QWERTY-MAN</div>
       <div className="content">
         <h1>Why Us?</h1>
         <section className="section1">
