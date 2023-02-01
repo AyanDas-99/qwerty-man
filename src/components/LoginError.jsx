@@ -21,7 +21,6 @@ const LoginError = ({ pageName, setShowle }) => {
         color: "white",
         fontWeight: 600,
         backgroundColor: "rgba(255, 0, 0, 0.359)",
-        padding: "10px",
         margin: "10px",
         borderRadius: "5px",
         position: "absolute",
