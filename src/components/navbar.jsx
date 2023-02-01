@@ -64,7 +64,7 @@ export const Navbar = () => {
               if (!user) {
                 console.log("Timeline clicked");
                 e.preventDefault();
-              setShowle({status: true, pageName: "Timeline"});
+                setShowle({ status: true, pageName: "Timeline" });
               }
             }}
           >
@@ -76,9 +76,11 @@ export const Navbar = () => {
           <Link
             to={"/contact"}
             onClick={(e) => {
-              e.preventDefault();
               setNavClicked(false);
-              setShowle({status: true, pageName: "Talk to us"});
+              if (!user) {
+                e.preventDefault();
+                setShowle({ status: true, pageName: "Talk to us" });
+              }
             }}
           >
             Talk To Us
