@@ -7,11 +7,12 @@ import { useEffect, useState } from "react";
 import { signInWithPopup } from "firebase/auth";
 import menuCloseIcon from "../assets/images/menu/menu-unfold-line.svg";
 import menuOpenIcon from "../assets/images/menu/menu-fold-line.svg";
+import LoginError from "./LoginError";
 
 export const Navbar = () => {
   const [user] = useAuthState(auth);
   const [isvisible, setIsVisible] = useState(false);
-
+  const [showle, setShowle] = useState({ status: false, pageName: "" });
   // Sign out function
   const signin = async () => {
     await signInWithPopup(auth, provider);
@@ -33,6 +34,9 @@ export const Navbar = () => {
 
   return (
     <header>
+      {showle.status && (
+        <LoginError pageName={showle.pageName} setShowle={setShowle} />
+      )}
       <div className="nav-container">
         <Link to={"/"}>
           <div className="main-logo">QWERTY-MAN</div>
@@ -53,13 +57,30 @@ export const Navbar = () => {
           <Link to={"/"} onClick={() => setNavClicked(false)}>
             Home
           </Link>
-          <Link to={"/timeline"} onClick={() => setNavClicked(false)}>
+          <Link
+            to={"/timeline"}
+            onClick={(e) => {
+              setNavClicked(false);
+              if (!user) {
+                console.log("Timeline clicked");
+                e.preventDefault();
+              setShowle({status: true, pageName: "Timeline"});
+              }
+            }}
+          >
             Timeline
           </Link>
           <Link to={"/about"} onClick={() => setNavClicked(false)}>
             About Us
           </Link>
-          <Link to={"/contact"} onClick={() => setNavClicked(false)}>
+          <Link
+            to={"/contact"}
+            onClick={(e) => {
+              e.preventDefault();
+              setNavClicked(false);
+              setShowle({status: true, pageName: "Talk to us"});
+            }}
+          >
             Talk To Us
           </Link>
         </nav>
