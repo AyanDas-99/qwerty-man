@@ -16,6 +16,7 @@ export const Home = () => {
   const [seconds, setSeconds] = useState(time);
   const [testFinished, setTestFinished] = useState(false);
   const [hasRun, setHasRun] = useState(false);
+  const [finishing, setFinishing] = useState(false);
 
   // Timer Function
   const runTimer = () => {
@@ -23,7 +24,10 @@ export const Home = () => {
       setSeconds((seconds) => {
         if (seconds === 1) {
           clearInterval(timer);
-          setTestFinished(true);
+          setFinishing(true);
+          setTimeout(()=>
+          setTestFinished(true)
+          , 1000)
           return 0;
         }
         return seconds - 1;
@@ -98,7 +102,7 @@ export const Home = () => {
       </div>
 
       {!testFinished ? (
-        <div className="test-section" id="test-section">
+        <div className={`test-section ${finishing && "vanish"}`} id="test-section">
           {/* TImer section */}
           <div className="timer-section">
             <Info type={"Timer"} data={seconds} extension={"s"} />
