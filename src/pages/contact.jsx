@@ -60,6 +60,10 @@ const Contact = () => {
     }, 4000);
   }, [errors]);
 
+  useEffect(()=>{
+    window.scroll(0, 0);
+  }, [])
+
   if (!msgSent) {
     return (
       <div className="contact-container">
