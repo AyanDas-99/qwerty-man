@@ -9,12 +9,19 @@ import { useReducer } from "react";
 import { useEffect } from "react";
 import calenderPic from "../assets/images/calender.svg";
 import toggleIcon from "../assets/images/change.svg";
+import { useNavigate } from "react-router-dom";
 
 export const Timeline = () => {
   const [user] = useAuthState(auth);
   const { timeline } = useGetTimeline(user?.uid);
 
+  const navigate = useNavigate();
+
   useEffect(() => window.scrollTo(0, 0), []);
+
+  useEffect(()=>{
+    if(!user) navigate("/");
+  }, [user])
 
   return (
     <div className="timeline-container">
@@ -169,7 +176,7 @@ const HistoryData = (props) => {
         </select>
 
         {/* Month selecton */}
-        <label htmlfor="month">Month</label>
+        <label htmlFor="month">Month</label>
         <select
           id="month"
           name="month"
@@ -186,7 +193,7 @@ const HistoryData = (props) => {
         </select>
 
         {/* year selection */}
-        <label htmlfor="year">Year</label>
+        <label htmlFor="year">Year</label>
         <select
           id="year"
           name="year"
@@ -221,8 +228,8 @@ const HistoryData = (props) => {
                     e.date ===
                     `${userDate.day}-${userDate.month}-${userDate.year}`
                 )
-                .map((e) => (
-                  <tr>
+                .map((e, key) => (
+                  <tr key={key}>
                     <td>{e.date}</td>
                     <td>{e.speed} WPM</td>
                     <td>{e.accuracy} %</td>
