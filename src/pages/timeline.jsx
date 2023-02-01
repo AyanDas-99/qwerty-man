@@ -91,13 +91,19 @@ const HistoryData = (props) => {
   // days, months and years avaiblabe in data
   const availableDates = {
     days: Array.from(
-      new Set(timelineData.map(({ date }) => date.split("-")[0]))
+      new Set(
+        timelineData.map(({ date }) => date.split("-")[0]).sort((a, b) => a - b)
+      )
     ),
     months: Array.from(
-      new Set(timelineData.map(({ date }) => date.split("-")[1]))
+      new Set(
+        timelineData.map(({ date }) => date.split("-")[1]).sort((a, b) => a - b)
+      )
     ),
     years: Array.from(
-      new Set(timelineData.map(({ date }) => date.split("-")[2]))
+      new Set(
+        timelineData.map(({ date }) => date.split("-")[2]).sort((a, b) => a - b)
+      )
     ),
   };
 
@@ -156,9 +162,9 @@ const HistoryData = (props) => {
             --select day--
           </option>
           {availableDates.days.map((e) => (
-              <option value={e} key={e}>
-                {e}
-              </option>
+            <option value={e} key={e}>
+              {e}
+            </option>
           ))}
         </select>
 
