@@ -1,142 +1,134 @@
 .hero-section {
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    align-items: center;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
 }
 
-.hero-section>h1 {
-    font-size: 10vw;
-    font-family: --var(--ff-main);
+.hero-section > h1 {
+  font-size: 10vw;
+  font-family: --var(--ff-main);
 }
 
-.hero-section>p {
-    font-size: 1.5rem;
-    letter-spacing: 4px;
+.hero-section > p {
+  font-size: 1.5rem;
+  letter-spacing: 4px;
 }
 
 .hero-section .arrow img {
-    width: 10vw;
-    min-width: 100px;
+  width: 10vw;
+  min-width: 100px;
 }
 
 .hero-section img:hover {
-    cursor: pointer;
-    animation: move 1s ease-in-out infinite;
+  cursor: pointer;
+  animation: move 1s ease-in-out infinite;
 }
 
 @keyframes move {
-    0% {
-        transform: translateY(0);
-    }
+  0% {
+    transform: translateY(0);
+  }
 
-    50% {
-        transform: translateY(-10px);
-    }
+  50% {
+    transform: translateY(-10px);
+  }
 
-    to {
-        transform: translateY(0);
-    }
+  to {
+    transform: translateY(0);
+  }
 }
-
 
 .test-section {
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    align-items: center;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
 }
 
-.test-section>.sentence>p {
-    font-size: 2rem;
-    max-width: 1000px;
-    overflow: hidden;
-    height: 2rem;
-    padding: 8px;
+.test-section > .sentence > p {
+  font-size: 2rem;
+  max-width: 1000px;
+  overflow: hidden;
+  height: 2rem;
+  padding: 8px;
 }
 
-.RetryBtn>img {
-    width: 50px;
-    transition: transform 1s ease;
+.RetryBtn > img {
+  width: 50px;
+  transition: transform 1s ease;
 }
 
-.RetryBtn>img:hover {
-    transform: rotate(360deg);
+.RetryBtn > img:hover {
+  transform: rotate(360deg);
 }
 
 .RetryBtn:hover {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .highLight {
-    color: white;
+  color: white;
 }
 
 .wrongLetter {
-    color: red;
-    text-decoration: underline;
+  color: red;
+  text-decoration: underline;
 }
 
 .write {
-    width: 100%;
+  width: 100%;
 }
 
-.write>input {
-    width: 60%;
-    font-size: 1.5rem;
-    background-color: #313B4F;
-    border: none;
-    outline: none;
-    color: white;
-    padding: 10px;
-    text-align: center;
+.write > input {
+  width: 60%;
+  font-size: 1.5rem;
+  background-color: #313b4f;
+  border: none;
+  outline: none;
+  color: white;
+  padding: 10px;
+  text-align: center;
 }
 
 .timer-section {
-    display: flex;
-    align-items: center;
-    gap: 6em;
+  display: flex;
+  align-items: center;
+  gap: 6em;
 }
 
 .option-item {
-    font-size: 1.5rem;
-    margin: .7em;
-    border: none;
-    background: transparent;
-    color: #949BAB;
-    transition: color 200ms ease;
+  font-size: 1.5rem;
+  margin: 0.7em;
+  border: none;
+  background: transparent;
+  color: #949bab;
+  transition: color 200ms ease;
 }
 
 .option-item:hover {
-    cursor: pointer;
-    color: white;
+  cursor: pointer;
+  color: white;
 }
 
-
-
-
 @media only screen and (max-width: 850px) {
-    .hero-section {
-        margin-top: 5em;
-    }
+  .hero-section {
+    margin-top: 5em;
+  }
 
-    .test-section {
-        padding-top: 5em;
-        justify-content: center;
-        gap: 3em;
-    }
+  .test-section {
+    padding-top: 5em;
+    justify-content: center;
+    gap: 3em;
+  }
 
-    .timer-section {
-        display: block;
-    }
+  .timer-section {
+    display: block;
+  }
 
-    .write > input {
-        width: 90%;
-    }
-
-    /* .hero-section>h1 {
-        font-size: 2rem;
-    } */
+  .write > input {
+    width: 90%;
+  }
 }
