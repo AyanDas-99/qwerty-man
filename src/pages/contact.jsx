@@ -8,6 +8,7 @@ import { addDoc, collection } from "firebase/firestore";
 import { useAuthState } from "react-firebase-hooks/auth";
 import loader from "../assets/images/loader.gif";
 import { useNavigate } from "react-router-dom";
+import LoginError from "../components/LoginError";
 
 const Contact = () => {
   const [user] = useAuthState(auth);
@@ -15,6 +16,7 @@ const Contact = () => {
   const [showError, setShowError] = useState(false);
   const [msgSent, setMsgSent] = useState(false);
   const [msgSending, setMsgSending] = useState(false);
+  const [showle, setShowle] = useState({ status: false, pageName: "" });
 
   // connecting to db
   const postRef = collection(db, "messages");
@@ -60,19 +62,27 @@ const Contact = () => {
     }, 4000);
   }, [errors]);
 
-  useEffect(()=>{
+  useEffect(() => {
     window.scroll(0, 0);
-  }, [])
+  }, []);
 
   if (!msgSent) {
     return (
       <div className="contact-container">
+        {showle.status && (
+          <LoginError pageName={showle.pageName} setShowle={setShowle} />
+        )}
         <div className="cover">
           <h2>What's in your mind?</h2>
           <h2>I'd love to hear your thoughts</h2>
         </div>
         <div className="contact-form">
-          <h2 className="mobileHeading" style={{margin: '1em 0', color: 'white' }}>Share your thoughts</h2>
+          <h2
+            className="mobileHeading"
+            style={{ margin: "1em 0", color: "white" }}
+          >
+            Share your thoughts
+          </h2>
           {showError && (
             <div className="errorDiv">
               {errors.fullName && (
@@ -106,7 +116,16 @@ const Contact = () => {
                 Reset
               </button>
               {!msgSending ? (
-                <button className="blue" type="submit">
+                <button
+                  className="blue"
+                  type="submit"
+                  onClick={(e) => {
+                    if (!user) {
+                      e.preventDefault();
+                      setShowle({ status: true, pageName: "Talk to us" });
+                    }
+                  }}
+                >
                   Send{" "}
                 </button>
               ) : (
