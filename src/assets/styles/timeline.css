@@ -50,7 +50,6 @@
 
 .history-data {
   color: white;
-  padding: 1em;
   margin-top: 2em;
 }
 
@@ -98,13 +97,14 @@ select::-ms-expand {
 
 .data-section {
   max-height: 500px;
+  max-width: 700px;
   overflow-y: auto;
   box-shadow: 0 0 10px black;
+  margin: 0 auto;
 }
 
 .data-section > table {
-  width: 80%;
-  margin: 0 auto;
+  width: 100%;
 }
 
 .data-section > table > thead {
@@ -155,6 +155,10 @@ tbody > tr:hover {
 
   .chart {
     margin: 0;
+  }
+
+  .data_section > .toggle > button {
+    margin: 1em auto;
   }
   
 }
