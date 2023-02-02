@@ -135,4 +135,8 @@ form button:hover {
   .contact-container > .cover {
     display: none;
   }
+
+  form textarea {
+    height: 150px;
+  }
 }
