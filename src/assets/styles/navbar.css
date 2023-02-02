@@ -146,4 +146,8 @@ a {
   .navClicked {
     transform: translateX(0);
   }
+
+  .main-logo {
+    font-size: 5vw;
+  }
 }
